@@ -1,0 +1,152 @@
+{
+    "client": "Thunder Client",
+    "collectionName": "product",
+    "dateExported": "2023-09-25T18:00:22.379Z",
+    "version": "1.1",
+    "folders": [],
+    "requests": [
+        {
+            "_id": "95c06f07-841e-4465-83fe-fde959b71d8e",
+            "colId": "3bc798ae-4eba-42b1-8b4c-46a19ac9ea64",
+            "containerId": "",
+            "name": "update product  -admin",
+            "url": "http://localhost:5000/api/v1/product/6509d994486684cdef91fa96",
+            "method": "PUT",
+            "sortNum": 10000,
+            "created": "2023-09-20T16:54:37.171Z",
+            "modified": "2023-09-20T16:54:37.171Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"name\": \"product1\",\n  \"description\": \"test prod update\",\n  \"price\": 15600,\n  \"category\": \"Laptop\",\n  \"images\": [\n    {\n      \"public_id\": \"sampleImg\",\n      \"url\": \"sampleUrl\"\n    }\n  ]\n}",
+                "form": []
+            },
+            "tests": []
+        },
+        {
+            "_id": "e0062008-6a03-4808-9a55-7e547167fc43",
+            "colId": "3bc798ae-4eba-42b1-8b4c-46a19ac9ea64",
+            "containerId": "",
+            "name": "create a product -admin",
+            "url": "http://localhost:5000/api/v1/product/new",
+            "method": "POST",
+            "sortNum": 20000,
+            "created": "2023-09-20T16:54:48.074Z",
+            "modified": "2023-09-23T19:14:38.663Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"name\": \"product4\",\n  \"price\": 80000,\n  \"description\": \"test prod3\",\n  \"category\": \"pc\",\n  \"images\": {\n    \"public_id\": \"sampleImg\",\n    \"url\": \"sampleUrl\"\n  }\n}",
+                "form": []
+            },
+            "tests": []
+        },
+        {
+            "_id": "c8c1ec13-a28f-47ac-88f3-25194968b750",
+            "colId": "3bc798ae-4eba-42b1-8b4c-46a19ac9ea64",
+            "containerId": "",
+            "name": "get all product",
+            "url": "http://localhost:5000/api/v1/products",
+            "method": "GET",
+            "sortNum": 30000,
+            "created": "2023-09-20T16:54:54.961Z",
+            "modified": "2023-09-20T16:54:54.961Z",
+            "headers": [],
+            "params": [],
+            "tests": []
+        },
+        {
+            "_id": "af551d1b-dcd2-454d-b227-4309b1e98a73",
+            "colId": "3bc798ae-4eba-42b1-8b4c-46a19ac9ea64",
+            "containerId": "",
+            "name": "delete product -admin",
+            "url": "http://localhost:5000/api/v1/product/650f1fc086225a497eef218e",
+            "method": "DELETE",
+            "sortNum": 40000,
+            "created": "2023-09-21T16:38:11.277Z",
+            "modified": "2023-09-23T17:26:36.192Z",
+            "headers": [],
+            "params": [],
+            "tests": []
+        },
+        {
+            "_id": "1fcc8b72-2a47-4a69-a6e5-85bae58d48bf",
+            "colId": "3bc798ae-4eba-42b1-8b4c-46a19ac9ea64",
+            "containerId": "",
+            "name": "get single product",
+            "url": "http://localhost:5000/api/v1/product/650c7362807561b1e7cc2615",
+            "method": "GET",
+            "sortNum": 50000,
+            "created": "2023-09-21T16:44:57.993Z",
+            "modified": "2023-09-21T16:46:41.231Z",
+            "headers": [],
+            "params": [],
+            "tests": []
+        },
+        {
+            "_id": "2a72bcf5-aaf5-4291-9751-09b1c2db76b1",
+            "colId": "3bc798ae-4eba-42b1-8b4c-46a19ac9ea64",
+            "containerId": "",
+            "name": "search a product",
+            "url": "http://localhost:5000/api/v1/products?page=1",
+            "method": "GET",
+            "sortNum": 60000,
+            "created": "2023-09-23T17:07:05.524Z",
+            "modified": "2023-09-23T19:16:11.174Z",
+            "headers": [],
+            "params": [
+                {
+                    "name": "keyword",
+                    "value": "product1",
+                    "isDisabled": true,
+                    "isPath": false
+                },
+                {
+                    "name": "category",
+                    "value": "Laptop",
+                    "isDisabled": true,
+                    "isPath": false
+                },
+                {
+                    "name": "price[gt]",
+                    "value": "0",
+                    "isDisabled": true,
+                    "isPath": false
+                },
+                {
+                    "name": "price[lt]",
+                    "value": "200000",
+                    "isDisabled": true,
+                    "isPath": false
+                },
+                {
+                    "name": "page",
+                    "value": "1",
+                    "isPath": false
+                }
+            ],
+            "tests": []
+        },
+        {
+            "_id": "e38567a6-8289-4f1a-a145-d6ddcc0f463c",
+            "colId": "3bc798ae-4eba-42b1-8b4c-46a19ac9ea64",
+            "containerId": "",
+            "name": "register user",
+            "url": "http://localhost:5000/api/v1/register",
+            "method": "POST",
+            "sortNum": 80000,
+            "created": "2023-09-25T17:33:28.016Z",
+            "modified": "2023-09-25T17:35:08.263Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"name\": \"VINEET\",\n  \"email\": \"vineet1122@gmail.com\",\n  \"password\": \"password\"\n}",
+                "form": []
+            },
+            "tests": []
+        }
+    ]
+}
