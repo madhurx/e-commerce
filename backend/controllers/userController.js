@@ -2,6 +2,7 @@ const catchAsyncError = require("../middleware/catchAsyncError");
 const User = require("../models/userModel");
 const ErrorHandler = require("../utils/errorHandler");
 const sendToken = require("../utils/jwtToken");
+const bcrypt = require("bcryptjs")
 
 // Register a user
 const registerUser = catchAsyncError(async (req, res, next) => {
@@ -32,7 +33,7 @@ const loginUser = catchAsyncError(async (req, res, next) => {
 		return next(new ErrorHandler("Invalid email or password", 401));
 	}
 
-	const isPasswordMatched = await User.comparePassword(password);
+	const isPasswordMatched = await bcrypt.compare(password, user.password);
 	if (!isPasswordMatched) {
 		return next(new ErrorHandler("Invalid email or password", 401));
 	}
@@ -40,4 +41,18 @@ const loginUser = catchAsyncError(async (req, res, next) => {
 	sendToken(user, 200, res);
 });
 
-module.exports = { registerUser, loginUser };
+const logOut = catchAsyncError(async (req, res, next) => {
+	// res.cookie("token", null, {
+	// 	expires: new Date(Date.now()),
+	// 	httpOnly: true,
+	// });
+
+    res.clearCookie("token");
+
+	res.status(200).json({
+		success: true,
+		message: "Logged Out",
+	});
+});
+
+module.exports = { registerUser, loginUser, logOut };
