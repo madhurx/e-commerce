@@ -2,7 +2,7 @@ const catchAsyncError = require("../middleware/catchAsyncError");
 const User = require("../models/userModel");
 const ErrorHandler = require("../utils/errorHandler");
 const sendToken = require("../utils/jwtToken");
-const bcrypt = require("bcryptjs")
+const bcrypt = require("bcryptjs");
 
 // Register a user
 const registerUser = catchAsyncError(async (req, res, next) => {
@@ -47,7 +47,7 @@ const logOut = catchAsyncError(async (req, res, next) => {
 	// 	httpOnly: true,
 	// });
 
-    res.clearCookie("token");
+	res.clearCookie("token");
 
 	res.status(200).json({
 		success: true,
