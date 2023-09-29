@@ -1,12 +1,8 @@
 const jwt = require("jsonwebtoken");
-const user = require('../models/userModel');
 
 //creating token and saving in cookie
 const sendToken = (user, statusCode, res) => {
-	// const token = user.getJWTToken();
-    console.log({user}.user.id);
-
-	const token = jwt.sign({user}, process.env.JWT_SECRET);
+	const token = user.getJWTToken();
 
 	// options for cookie
 	const options = {

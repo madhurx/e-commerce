@@ -3,8 +3,6 @@ const express = require("express");
 const app = express();
 app.use(express.json());
 
-
-
 const errorMiddleware = require("./middleware/error");
 const product = require("./routes/productRoute");
 const user = require("./routes/userRoute");
