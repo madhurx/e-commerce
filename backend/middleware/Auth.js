@@ -10,22 +10,15 @@ const isAuthenticatedUser = catchAsyncError(async (req, res, next) => {
 	}
 
 	const decodedData = await jwt.verify(token, process.env.JWT_SECRET);
-    console.log(decodedData.user.id);
 	req.user = await User.findById(decodedData.id);
-    console.log(req.user);
 	next();
 });
 
 const authorizedRoles = (...roles) => {
-    
 	return (req, res, next) => {
-        console.log(req.user);
 		if (!roles.includes(req.user.role)) {
 			return next(
-				new ErrorHandler(
-					`Role: ${req.user.role} is not allowed to access the resource`,
-					403,
-				),
+				new ErrorHandler(`Role: ${req.user.role} is not allowed to access the resource`, 403),
 			);
 		}
 		next();
