@@ -20,7 +20,7 @@ const sendEmail = async (options) => {
 		from: process.env.SMTP_USER,
 		to: options.email,
 		subject: options.subject,
-        html: `<b>This is bold text ${options.message}</b>`,
+        html: `<b> ${options.message}</b>`,
 	};
 	transporter.sendMail(mailOptions, function (error, info) {
 		if (error) {
