@@ -63,19 +63,19 @@ const forgetPassword = catchAsyncError(async (req, res, next) => {
 	}
 
 	//get reset pass token
-	const resetToken = user.getResetPasswordToken();
+	const resetToken = await user.getResetPasswordToken();
 	await user.save({ validateBeforeSave: false });
 
 	const resetPassURL = `${req.protocol}://${req.get("host")}/api/v1/password/reset${resetToken}`;
 
-	const message = `Reset your password : \n\n ${resetPassURL} \n\n If you not requested this email, then ignore it.`;
+	const message = `Reset your password : ${resetPassURL} \n\n If you not requested this email, then ignore it.`;
 	try {
 		await sendEmail({
 			email: user.email,
 			subject: `E-commerce password recovery`,
 			message,
 		});
-		res.status(200).json({
+		await res.status(200).json({
 			success: true,
 			message: `Email sent to ${user.email} successfully`,
 		});

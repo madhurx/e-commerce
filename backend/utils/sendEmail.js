@@ -1,21 +1,36 @@
 const nodeMailer = require("nodemailer");
+require("dotenv").config();
 
 const sendEmail = async (options) => {
-	const transporter = await nodeMailer.createTransport({
-		service: process.env.SMPT_SERVICE,
+	const transporter = nodeMailer.createTransport({
+		host: process.env.SMTP_HOST,
+		port: process.env.SMTP_PORT,
+		secure: true,
+        secureConnection: false,
 		auth: {
-			user: process.env.SMPT_MAIL,
-			pass: process.env.SMPT_PASS,
+			user: process.env.SMTP_USER,
+			pass: process.env.SMTP_PASS,
 		},
+        tls: {
+            ciphers: 'SSLv3',
+        },
 	});
 
 	const mailOptions = {
-		from: process.env.SMPT_MAIL,
+		from: process.env.SMTP_USER,
 		to: options.email,
 		subject: options.subject,
-		text: options.message,
+        html: `<b>This is bold text ${options.message}</b>`,
 	};
-	transporter.sendMail(mailOptions);
+	transporter.sendMail(mailOptions, function (error, info) {
+		if (error) {
+			console.log(error);
+		} else {
+			console.log("Email sent: " + info.response);
+		}
+	});
 };
+
+
 
 module.exports = sendEmail;
