@@ -1,12 +1,12 @@
 import "./App.css";
-import Header from "./component/layout/Header";
-import { BrowserRouter as Router } from "react-router-dom";
 import Navbar from "./component/layout/Navbar";
+import Navbar2 from "./component/layout/Navbar2";
 
 function App() {
 	return (
 		<div>
-			<Navbar />
+			{/* <Navbar /> */}
+            <Navbar2/>
 		</div>
 	);
 }
