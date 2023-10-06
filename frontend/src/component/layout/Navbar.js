@@ -43,7 +43,7 @@ const Navbar = () => {
 						setOpen(!open);
 					}}
 					className="text-3xl absolute right-8 top-6 cursor-pointer md:hidden">
-					{open ? (
+					{!open ? (
 						<MenuRoundedIcon sx={{ fontSize: 40 }} color="success" />
 					) : (
 						<CloseRoundedIcon sx={{ fontSize: 40 }} color="secondary" />
