@@ -17,11 +17,11 @@ function App() {
 				],
 			},
 		});
-	});
+	}, []);
     
 	return (
 		<div>
-			{/* <Navbar2/> */}
+			<Navbar2/>
 			<Header />
             <Footer/>
 		</div>
