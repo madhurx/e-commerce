@@ -24,7 +24,7 @@ function App() {
 			path: "/",
 			element: (
 				<div>
-					{/* <Header /> */}
+					<Header />
                     <Home/>
 					<Footer />
 				</div>
