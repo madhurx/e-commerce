@@ -4,7 +4,7 @@ import MouseTwoToneIcon from "@mui/icons-material/MouseTwoTone";
 const Home = () => {
 	return (
 		<>
-			<div className="banner bg-gradient-to-r from-cyan-500 to-blue-500 h-[100vmin] flex flex-col text-center items-center justify-center text-white ">
+			<div className="banner bg-gradient-to-r from-cyan-500 to-blue-500 h-[100vmin] flex flex-col text-center items-center justify-center text-white md:mt-[142px] mt-[92px]">
 				<p className="font-normal text-[1.4vmax] font-['Lucida Sans']">
 					Welcome to ECommerce
 				</p>

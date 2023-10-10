@@ -23,7 +23,7 @@ function App() {
 		{
 			path: "/",
 			element: (
-				<div>
+				<div className="flex flex-col">
 					<Header />
                     <Home/>
 					<Footer />
