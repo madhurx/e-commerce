@@ -1,5 +1,13 @@
 import React from "react";
 import MouseTwoToneIcon from "@mui/icons-material/MouseTwoTone";
+import Product from "./Product";
+
+const product = {
+	_id: 1,
+	name: "Product 1",
+	price: 1000,
+	image: ["https://w0.peakpx.com/wallpaper/983/628/HD-wallpaper-ps5-amoled-2020-amoled-black-logo-play-playstation-playstation-5-ps5-super-amoled.jpg"],
+};
 
 const Home = () => {
 	return (
@@ -17,6 +25,12 @@ const Home = () => {
 						<MouseTwoToneIcon />
 					</button>
 				</a>
+			</div>
+			<h2 className="homeHeading text-center font-['Roboto'] font-[1.4vmax] border-b-[1px] border-solid border-gray-700 w-[20vmax] p-[1vmax] mx-[5vmax] my-auto text-gray-800 self-center">
+				Feature Products
+			</h2>
+			<div className="container" id="container">
+				<Product product={product} />
 			</div>
 		</>
 	);
