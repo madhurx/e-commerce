@@ -1,3 +1,9 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer utilities {
+	.banner::after {
+		clip-path: polygon(100% 66%, 0% 100%, 100% 100%);
+	}
+}

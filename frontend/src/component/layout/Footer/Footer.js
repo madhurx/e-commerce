@@ -6,14 +6,22 @@ const Footer = () => {
 	return (
 		<div className="mt-[10vmax] p-[2vmax] bg-gray-950 text-white flex text-center">
 			<div className="leftFooter w-1/5 flex flex-col items-center">
-				<h4 className="font-['Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif ]">
+				<h4 className="font-['Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif ] text-[1vmax]">
 					DOWNLOAD OUR APP
 				</h4>
-				<p className="text-center font-['Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', Lucida Sans Unicode', Geneva, Verdana, sans-serif]">
+				<p className="text-center font-['Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', Lucida Sans Unicode', Geneva, Verdana, sans-serif] text-[1.2vmax]">
 					Download App for Android and IOS mobile phone
 				</p>
-				<img src={playStore} alt="playStore" className="w-[10vmax] m-[1vmax] cursor-pointer" />
-				<img src={appStore} alt="appStore" className="w-[10vmax] m-[1vmax] cursor-pointer" />
+				<img
+					src={playStore}
+					alt="playStore"
+					className="w-[10vmax] m-[1vmax] cursor-pointer"
+				/>
+				<img
+					src={appStore}
+					alt="appStore"
+					className="w-[10vmax] m-[1vmax] cursor-pointer"
+				/>
 			</div>
 
 			<div className="midFooter w-3/5 ">
@@ -29,7 +37,7 @@ const Footer = () => {
 				</h4>
 				<a
 					href="https://fb.com"
-					className="no-underline text-[1.4vmax] font-['Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif] text-white">
+					className="no-underline text-[1.4vmax] font-['Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif] text-white transition-all duration-500   ">
 					Facebook
 				</a>
 				<a href="https://fb.com">Facebook</a>

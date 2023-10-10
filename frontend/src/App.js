@@ -1,12 +1,12 @@
 import React, { useEffect } from "react";
 import "./App.css";
 import Header from "./component/layout/Header/Header";
-import Navbar2 from "./component/layout/Navbar2";
 import webFont from "webfontloader";
 import Footer from "./component/layout/Footer/Footer";
+import { RouterProvider, createBrowserRouter } from "react-router-dom";
+import Home from "./component/Home/Home";
 
 function App() {
-
 	useEffect(() => {
 		webFont.load({
 			google: {
@@ -18,14 +18,21 @@ function App() {
 			},
 		});
 	}, []);
-    
-	return (
-		<div>
-			<Navbar2/>
-			<Header />
-            <Footer/>
-		</div>
-	);
+
+	const router = createBrowserRouter([
+		{
+			path: "/",
+			element: (
+				<div className="flex flex-col">
+					<Header />
+                    <Home/>
+					<Footer />
+				</div>
+			),
+		},
+	]);
+
+	return <RouterProvider router={router} />;
 }
 
 export default App;
