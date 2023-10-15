@@ -1,6 +1,7 @@
 import React from "react";
 import MouseTwoToneIcon from "@mui/icons-material/MouseTwoTone";
 import Product from "./Product";
+import MetaData from "../layout/MetaData";
 
 const product = {
 	_id: 1,
@@ -12,6 +13,7 @@ const product = {
 const Home = () => {
 	return (
 		<>
+        <MetaData title="ECOMMERCE"/>
 			<div className="banner bg-gradient-to-r from-cyan-500 to-blue-500 h-[100vmin] flex flex-col text-center items-center justify-center text-white after:contents-[''] after:w-[100vw] after:h-[100vmin] after:bg-white after:absolute after:top-0 after:left-0 after:max-w-full ">
 				<p className="font-normal text-[1.4vmax] font-['Lucida Sans']">
 					Welcome to ECommerce
