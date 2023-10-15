@@ -7,3 +7,31 @@
 		clip-path: polygon(100% 66%, 0% 100%, 100% 100%);
 	}
 }
+@layer utilities {
+	@media screen and (max-width: 600px) {
+		.productCard > p {
+			font-size: 1.7vmax;
+		}
+
+		.productCard > div {
+			margin: 0vmax;
+			display: block;
+		}
+
+		.productCard > span {
+			font-size: 1.5vmax;
+		}
+
+		.productCard > div > span {
+			margin: 0 0.5vmax;
+			font: 300 1vmax "Roboto";
+		}
+	}
+}
+
+@layer utilities {
+	* {
+		margin: 0;
+		scroll-behavior: smooth;
+	}
+}
