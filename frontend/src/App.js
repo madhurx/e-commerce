@@ -5,6 +5,8 @@ import webFont from "webfontloader";
 import Footer from "./component/layout/Footer/Footer";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import Home from "./component/Home/Home";
+import { Provider } from "react-redux";
+import store from "./utils/store";
 
 function App() {
 	useEffect(() => {
@@ -23,11 +25,13 @@ function App() {
 		{
 			path: "/",
 			element: (
-				<div className="flex flex-col">
-					<Header />
-                    <Home/>
-					<Footer />
-				</div>
+				<Provider store = {store}>
+					<div className="flex flex-col">
+						<Header />
+						<Home />
+						<Footer />
+					</div>
+				</Provider>
 			),
 		},
 	]);
