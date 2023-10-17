@@ -2,12 +2,17 @@ import { createSlice } from "@reduxjs/toolkit";
 import { getProduct } from "../actions/productAction";
 
 const productSlice = createSlice({
-	name: "product",
+	name: "products",
 	initialState: {
 		products: [],
 		loading: false,
 		productsCount: 0,
 		error: null,
+	},
+	reducers: {
+		clearErrors: (state) => {
+			state.error = null;
+		},
 	},
 	extraReducers: {
 		[getProduct.pending]: (state) => {
@@ -17,7 +22,7 @@ const productSlice = createSlice({
 		[getProduct.fulfilled]: (state, action) => {
 			state.loading = false;
 			state.products = action.payload.products;
-			state.productsCount = action.payload.productsCount;
+			state.productsCount = action.payload.productCount;
 		},
 		[getProduct.rejected]: (state, action) => {
 			state.loading = false;
@@ -26,7 +31,6 @@ const productSlice = createSlice({
 	},
 });
 
-export const { allProductRequest, allProductSuccess, allProductFail, clearErrors } =
-	productSlice.actions;
+export const { clearErrors } = productSlice.actions;
 
 export default productSlice.reducer;

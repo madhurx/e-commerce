@@ -1,17 +1,11 @@
-import { createAsyncThunk } from "@reduxjs/toolkit";
+import { createAsyncThunk, isRejectedWithValue } from "@reduxjs/toolkit";
 
 export const getProduct = createAsyncThunk("productSlice", async () => {
 	try {
-		// dispatch(allProductRequest);
-
-		const data = await fetch("/api/v1/products/");
+		const data = await fetch("api/v1/products/");
 		const result = data.json();
 		return result;
 	} catch (error) {
-		console.log(error);
+		return isRejectedWithValue(error.response.data.message);
 	}
 });
-
-export const clearErrors = () => async (dispatch) => {
-	dispatch(clearErrors());
-};

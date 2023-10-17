@@ -5,21 +5,14 @@ import MetaData from "../layout/MetaData";
 import { useDispatch, useSelector } from "react-redux";
 import { getProduct } from "../../utils/actions/productAction";
 
-const product = {
-	_id: 1,
-	name: "Product 15",
-	price: 1000,
-	image: [
-		"https://w0.peakpx.com/wallpaper/983/628/HD-wallpaper-ps5-amoled-2020-amoled-black-logo-play-playstation-playstation-5-ps5-super-amoled.jpg",
-	],
-};
-
 const Home = () => {
 	const dispatch = useDispatch();
 
 	useEffect(() => {
 		dispatch(getProduct());
 	}, [dispatch]);
+
+	const { loading, error, products, productsCount } = useSelector((state) => state.products);
 
 	return (
 		<>
@@ -44,14 +37,7 @@ const Home = () => {
 			<div
 				className="container flex my-[2vmax] mx-auto w-[80vw] flex-wrap justify-center max-w-full"
 				id="container">
-				<Product product={product} />
-				<Product product={product} />
-				<Product product={product} />
-				<Product product={product} />
-				<Product product={product} />
-				<Product product={product} />
-				<Product product={product} />
-				<Product product={product} />
+				{products && products.map((product) => <Product product={product} />)}
 			</div>
 		</>
 	);
