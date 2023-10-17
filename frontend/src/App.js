@@ -23,11 +23,11 @@ function App() {
 		{
 			path: "/",
 			element: (
-				<div className="flex flex-col">
-					<Header />
-                    <Home/>
-					<Footer />
-				</div>
+					<div className="flex flex-col">
+						<Header />
+						<Home />
+						<Footer />
+					</div>
 			),
 		},
 	]);
