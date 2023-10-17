@@ -1,19 +1,17 @@
-// import { useDispatch } from "react-redux";
+import { createAsyncThunk } from "@reduxjs/toolkit";
 
-import { allProductFail, allProductRequest, allProductSuccess } from "../slices/productSlice";
-
-export const getProduct = () => async (dispatch) => {
+export const getProduct = createAsyncThunk("productSlice", async () => {
 	try {
-		dispatch(allProductRequest);
+		// dispatch(allProductRequest);
+
 		const data = await fetch("/api/v1/products/");
-        dispatch(allProductSuccess(data))
+		const result = data.json();
+		return result;
 	} catch (error) {
-		dispatch(allProductFail(error.response.data.message));
+		console.log(error);
 	}
-};
+});
 
 export const clearErrors = () => async (dispatch) => {
-    dispatch(clearErrors())
-
-}
-
+	dispatch(clearErrors());
+};

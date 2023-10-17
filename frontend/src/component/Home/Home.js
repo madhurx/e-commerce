@@ -1,19 +1,29 @@
-import React from "react";
+import React, { useEffect } from "react";
 import MouseTwoToneIcon from "@mui/icons-material/MouseTwoTone";
 import Product from "./Product";
 import MetaData from "../layout/MetaData";
+import { useDispatch, useSelector } from "react-redux";
+import { getProduct } from "../../utils/actions/productAction";
 
 const product = {
 	_id: 1,
 	name: "Product 15",
 	price: 1000,
-	image: ["https://w0.peakpx.com/wallpaper/983/628/HD-wallpaper-ps5-amoled-2020-amoled-black-logo-play-playstation-playstation-5-ps5-super-amoled.jpg"],
+	image: [
+		"https://w0.peakpx.com/wallpaper/983/628/HD-wallpaper-ps5-amoled-2020-amoled-black-logo-play-playstation-playstation-5-ps5-super-amoled.jpg",
+	],
 };
 
 const Home = () => {
+	const dispatch = useDispatch();
+
+	useEffect(() => {
+		dispatch(getProduct());
+	}, [dispatch]);
+
 	return (
 		<>
-        <MetaData title="ECOMMERCE"/>
+			<MetaData title="ECOMMERCE" />
 			<div className="banner bg-gradient-to-r from-cyan-500 to-blue-500 h-[100vmin] flex flex-col text-center items-center justify-center text-white after:contents-[''] after:w-[100vw] after:h-[100vmin] after:bg-white after:absolute after:top-0 after:left-0 after:max-w-full ">
 				<p className="font-normal text-[1.4vmax] font-['Lucida Sans']">
 					Welcome to ECommerce
@@ -31,7 +41,9 @@ const Home = () => {
 			<h2 className="homeHeading text-center font-['Roboto'] font-[1.4vmax] border-b-[1px] border-solid border-gray-700 w-[20vmax] p-[1vmax] mx-[5vmax] my-auto text-gray-800 self-center">
 				Feature Products
 			</h2>
-			<div className="container flex my-[2vmax] mx-auto w-[80vw] flex-wrap justify-center max-w-full" id="container">
+			<div
+				className="container flex my-[2vmax] mx-auto w-[80vw] flex-wrap justify-center max-w-full"
+				id="container">
 				<Product product={product} />
 				<Product product={product} />
 				<Product product={product} />
