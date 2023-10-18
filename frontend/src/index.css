@@ -34,4 +34,14 @@
 		margin: 0;
 		scroll-behavior: smooth;
 	}
+
+	.Loader_loading_div {
+		animation: loadingRotate 800ms linear infinite;
+	}
+
+	@keyframes loadingRotate {
+		to {
+			transform: rotateZ(-360deg);
+		}
+	}
 }

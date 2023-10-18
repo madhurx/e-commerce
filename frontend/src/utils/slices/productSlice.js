@@ -14,20 +14,21 @@ const productSlice = createSlice({
 			state.error = null;
 		},
 	},
-	extraReducers: {
-		[getProduct.pending]: (state) => {
-			state.loading = true;
-			state.products = [];
-		},
-		[getProduct.fulfilled]: (state, action) => {
-			state.loading = false;
-			state.products = action.payload.products;
-			state.productsCount = action.payload.productCount;
-		},
-		[getProduct.rejected]: (state, action) => {
-			state.loading = false;
-			state.error = action.payload;
-		},
+	extraReducers: (builder) => {
+		builder
+			.addCase(getProduct.pending, (state) => {
+				state.loading = true;
+				state.products = [];
+			})
+			.addCase(getProduct.fulfilled, (state, action) => {
+				state.loading = false;
+				state.products = action.payload.products;
+				state.productsCount = action.payload.productCount;
+			})
+			.addCase(getProduct.rejected, (state, action) => {
+				state.loading = false;
+				state.error = action.payload;
+			});
 	},
 });
 
