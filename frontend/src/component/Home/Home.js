@@ -3,21 +3,22 @@ import MouseTwoToneIcon from "@mui/icons-material/MouseTwoTone";
 import Product from "./Product";
 import MetaData from "../layout/MetaData";
 import { useDispatch, useSelector } from "react-redux";
-import { getProduct } from "../../utils/actions/productAction";
+import { getProducts, getProductsDetails } from "../../utils/actions/productAction";
 import Loader from "../layout/Loader/Loader";
 import { useAlert } from "react-alert";
 
 const Home = () => {
 	const { loading, error, products } = useSelector((state) => state.products);
-    const dispatch = useDispatch();
+	const dispatch = useDispatch();
 
 	const alert = useAlert();
-    useEffect(() => {
-        if (error) {
-          alert.error(error);
-        }
-        dispatch(getProduct());
-      }, [dispatch, error, alert]);
+	useEffect(() => {
+		if (error) {
+			alert.error(error);
+		}
+		dispatch(getProducts());
+		dispatch(getProductsDetails("652ed3a38dddc7c585c06582"));
+	}, [dispatch, error, alert]);
 
 	return (
 		<>
@@ -34,8 +35,7 @@ const Home = () => {
 							Find products below
 						</h1>
 						<a href="#container">
-							<button
-								className=" mb-[5vmax] cursor-pointer bg-white border border-solid border-white rounded-none p-[1vmax] transition-all duration-500 w-[9vmax] font-medium text-[1vmax] font-['Roboto'] text-black hover:bg-black hover:text-white after:content-none after:w-[100vw] after:h-[100vmin] after:bg-white after:absolute after:top-0 after:left-0 after:max-w-full">
+							<button className=" mb-[5vmax] cursor-pointer bg-white border border-solid border-white rounded-none p-[1vmax] transition-all duration-500 w-[9vmax] font-medium text-[1vmax] font-['Roboto'] text-black hover:bg-black hover:text-white after:content-none after:w-[100vw] after:h-[100vmin] after:bg-white after:absolute after:top-0 after:left-0 after:max-w-full">
 								Scroll
 								<MouseTwoToneIcon />
 							</button>

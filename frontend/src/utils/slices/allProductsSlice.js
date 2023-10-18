@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { getProduct } from "../actions/productAction";
+import { getProducts } from "../actions/productAction";
 
-const productSlice = createSlice({
+const allProductsSlice = createSlice({
 	name: "products",
 	initialState: {
 		products: [],
@@ -12,27 +12,28 @@ const productSlice = createSlice({
 	reducers: {
 		clearErrors: (state) => {
 			state.error = null;
+			return state;
 		},
 	},
 	extraReducers: (builder) => {
 		builder
-			.addCase(getProduct.pending, (state) => {
+			.addCase(getProducts.pending, (state) => {
 				state.loading = true;
 				state.products = [];
 			})
-			.addCase(getProduct.fulfilled, (state, action) => {
+			.addCase(getProducts.fulfilled, (state, action) => {
 				state.loading = false;
 				state.products = action.payload.products;
 				state.productsCount = action.payload.productCount;
-                state.error = action.payload.error;
+				state.error = action.payload.error;
 			})
-			.addCase(getProduct.rejected, (state, action) => {
+			.addCase(getProducts.rejected, (state, action) => {
 				state.loading = false;
 				state.error = action.payload;
 			});
 	},
 });
 
-export const { clearErrors } = productSlice.actions;
+export const { clearErrors } = allProductsSlice.actions;
 
-export default productSlice.reducer;
+export default allProductsSlice.reducer;

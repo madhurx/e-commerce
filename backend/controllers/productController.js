@@ -61,7 +61,7 @@ const getProductDetails = catchAsyncError(async (req, res, next) => {
 
 	res.status(200).json({
 		success: true,
-		msg: product,
+		product: product,
 	});
 });
 
