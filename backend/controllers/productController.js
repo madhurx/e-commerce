@@ -12,10 +12,7 @@ const createProduct = catchAsyncError(async (req, res, next) => {
 
 //get All Products
 const getAllProducts = catchAsyncError(async (req, res, next) => {
-    // return ("eror");
-	return next( new ErrorHandler("EROOR ", 404));
-
-	const resultPerPage = 5;    
+	const resultPerPage = 5;
 	const productCount = await Product.countDocuments();
 	const apiFeature = new apiFeatures(Product.find(), req.query)
 		.search()
