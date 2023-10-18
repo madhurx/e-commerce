@@ -8,7 +8,7 @@ const Product = ({ product }) => {
         edit: false,
         color: "rgba(64,89,99,1)",
         activeColor: "tomato",
-        value: product.rating,
+        value: product.ratings,
         isHalf: true,
         size: window.innerWidth < 600 ? 10 : 15,
     };
@@ -19,7 +19,7 @@ const Product = ({ product }) => {
 			to={product._id}
 			key={product.index}>
 			<img
-				src={product.images[0]}
+				src={product.images[0].url}
 				alt={product.name}
 				className="w-[14vmax] font-[1.2vmax] mx-[0.1vmax] my-[0.5vmax] mb-0 "
 			/>
