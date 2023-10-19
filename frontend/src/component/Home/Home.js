@@ -3,7 +3,7 @@ import MouseTwoToneIcon from "@mui/icons-material/MouseTwoTone";
 import Product from "./Product";
 import MetaData from "../layout/MetaData";
 import { useDispatch, useSelector } from "react-redux";
-import { getProducts, getProductsDetails } from "../../utils/actions/productAction";
+import { getProducts } from "../../utils/actions/productAction";
 import Loader from "../layout/Loader/Loader";
 import { useAlert } from "react-alert";
 
@@ -17,7 +17,6 @@ const Home = () => {
 			alert.error(error);
 		}
 		dispatch(getProducts());
-		dispatch(getProductsDetails("652ed3a38dddc7c585c06582"));
 	}, [dispatch, error, alert]);
 
 	return (

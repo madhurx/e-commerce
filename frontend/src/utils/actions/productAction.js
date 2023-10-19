@@ -10,7 +10,7 @@ export const getProducts = createAsyncThunk("allProductsSlice", async () => {
 	}
 });
 
-export const getProductsDetails = createAsyncThunk("productDetailSlice", async (id) => {
+export const getProductDetail = createAsyncThunk("productDetailSlice", async (id) => {
     try {
 		const data = await fetch(`api/v1/product/${id}`);
 		const result = await data.json();
