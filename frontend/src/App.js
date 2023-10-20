@@ -3,7 +3,7 @@ import "./App.css";
 import Header from "./component/layout/Header/Header";
 import webFont from "webfontloader";
 import Footer from "./component/layout/Footer/Footer";
-import { RouterProvider, createBrowserRouter } from "react-router-dom";
+import { Outlet, RouterProvider, createBrowserRouter } from "react-router-dom";
 import Home from "./component/Home/Home";
 import Loader from "./component/layout/Loader/Loader";
 import ProductDetails from "./component/Product/ProductDetails";
@@ -21,36 +21,33 @@ function App() {
 		});
 	}, []);
 
+	const AppLayout = () => {
+		return (
+			<div className="flex flex-col">
+				<Header />
+				<Outlet />
+				<Footer />
+			</div>
+		);
+	};
 	const router = createBrowserRouter([
 		{
 			path: "/",
-			element: (
-				<div className="flex flex-col">
-					<Header />
-					<Home />
-					<Footer />
-				</div>
-			),
-		},
-		{
-			path: "/product/:id",
-			element: (
-				<div>
-					<Header />
-					<ProductDetails />
-					<Footer />
-				</div>
-			),
-		},
-		{
-			path: "/loaderTest",
-			element: (
-				<div>
-					<Header />
-					<Loader />
-					<Footer />
-				</div>
-			),
+			element: <AppLayout />,
+			children: [
+				{
+					path: "/",
+					element: <Home />,
+				},
+				{
+					path: "/product/:id",
+					element: <ProductDetails />,
+				},
+				{
+					path: "/loaderTest",
+					element: <Loader />,
+				},
+			],
 		},
 	]);
 
