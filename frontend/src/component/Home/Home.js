@@ -1,11 +1,12 @@
 import React, { useEffect } from "react";
 import MouseTwoToneIcon from "@mui/icons-material/MouseTwoTone";
-import Product from "./Product";
+import ProductCard from "./ProductCard";
 import MetaData from "../layout/MetaData";
 import { useDispatch, useSelector } from "react-redux";
 import { getProducts } from "../../utils/actions/productAction";
 import Loader from "../layout/Loader/Loader";
 import { useAlert } from "react-alert";
+import { clearErrors } from "../../utils/slices/allProductsSlice";
 
 const Home = () => {
 	const { loading, error, products } = useSelector((state) => state.products);
@@ -15,6 +16,7 @@ const Home = () => {
 	useEffect(() => {
 		if (error) {
 			alert.error(error);
+			dispatch(clearErrors);
 		}
 		dispatch(getProducts());
 	}, [dispatch, error, alert]);
@@ -46,7 +48,7 @@ const Home = () => {
 					<div
 						className="container flex my-[2vmax] mx-auto w-[80vw] flex-wrap justify-center max-w-full"
 						id="container">
-						{products && products.map((product) => <Product product={product} />)}
+						{products && products.map((product) => <ProductCard product={product} />)}
 					</div>
 				</>
 			)}

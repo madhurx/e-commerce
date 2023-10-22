@@ -7,20 +7,23 @@ import ReactStars from "react-rating-stars-component";
 import "./ProductDetails.css";
 import ReviewCard from "./ReviewCard";
 import Loader from "../layout/Loader/Loader";
-import {useAlert} from 'react-alert';
+import { useAlert } from "react-alert";
+import { clearErrors } from "../../utils/slices/productDetailSlice";
 
 const ProductDetails = () => {
 	const dispatch = useDispatch();
-    const alert = useAlert();
-    
-
+	const alert = useAlert();
 	const params = useParams();
-
 	const { product, loading, error } = useSelector((state) => state.productDetail);
 
 	useEffect(() => {
+		if (error) {
+			alert.error(error);
+			dispatch(clearErrors);
+		}
 		dispatch(getProductDetail(params.id));
-	}, [dispatch, params.id]);
+	}, [dispatch, params.id, alert, error]);
+
 	const options = {
 		edit: false,
 		color: "rgba(64,89,99,1)",
@@ -29,7 +32,10 @@ const ProductDetails = () => {
 		isHalf: true,
 		size: window.innerWidth < 600 ? 10 : 15,
 	};
+    
 
+
+    
 	return (
 		<div>
 			{loading ? (

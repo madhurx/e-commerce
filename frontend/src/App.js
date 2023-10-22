@@ -7,6 +7,7 @@ import { Outlet, RouterProvider, createBrowserRouter } from "react-router-dom";
 import Home from "./component/Home/Home";
 import Loader from "./component/layout/Loader/Loader";
 import ProductDetails from "./component/Product/ProductDetails";
+import Products from "./component/Product/Products";
 
 function App() {
 	useEffect(() => {
@@ -43,9 +44,9 @@ function App() {
 					path: "/product/:id",
 					element: <ProductDetails />,
 				},
-				{
-					path: "/loaderTest",
-					element: <Loader />,
+                {
+					path: "/products",
+					element: <Products/>,
 				},
 			],
 		},
