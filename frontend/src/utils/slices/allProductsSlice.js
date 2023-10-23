@@ -9,7 +9,8 @@ const allProductsSlice = createSlice({
 		productsCount: 0,
 		error: null,
 		resultPerPage: 0,
-        currentPage:0
+        currentPage:0,
+        filteredProductsCount:0
 	},
 	reducers: {
 		clearErrors: (state) => {
@@ -29,6 +30,7 @@ const allProductsSlice = createSlice({
 				state.productsCount = action.payload.productCount;
 				state.error = action.payload.error;
 				state.resultPerPage = action.payload.resultPerPage;
+                state.filteredProductsCount = action.payload.filteredProductsCount;
 			})
 			.addCase(getProducts.rejected, (state, action) => {
 				state.loading = false;
