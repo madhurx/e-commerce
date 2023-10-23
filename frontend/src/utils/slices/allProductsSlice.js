@@ -9,6 +9,7 @@ const allProductsSlice = createSlice({
 		productsCount: 0,
 		error: null,
 		resultPerPage: 0,
+        currentPage:0
 	},
 	reducers: {
 		clearErrors: (state) => {

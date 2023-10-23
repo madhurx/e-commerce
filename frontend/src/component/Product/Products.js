@@ -19,8 +19,8 @@ const Products = () => {
 	);
 	const dispatch = useDispatch();
 	const alert = useAlert();
-	const setCurrentPageNo = () => {
-		setCurrentPage(2);
+	const setCurrentPageNo = (e) => {
+		setCurrentPage(e);
 	};
 
 	useEffect(() => {
@@ -28,11 +28,9 @@ const Products = () => {
 			alert.error(error);
 			dispatch(clearErrors);
 		}
-        // console.log(currentPage);
+		const getProductsActionParams = { keyword, currentPage };
 
-
-
-		dispatch(getProducts(keyword, currentPage));
+		dispatch(getProducts(getProductsActionParams));
 	}, [dispatch, error, alert, keyword, currentPage]);
 
 	return (
