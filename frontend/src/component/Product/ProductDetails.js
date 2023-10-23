@@ -32,10 +32,7 @@ const ProductDetails = () => {
 		isHalf: true,
 		size: window.innerWidth < 600 ? 10 : 15,
 	};
-    
 
-
-    
 	return (
 		<div>
 			{loading ? (
