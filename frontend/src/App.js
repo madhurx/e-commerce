@@ -8,6 +8,7 @@ import Home from "./component/Home/Home";
 import ProductDetails from "./component/Product/ProductDetails";
 import Products from "./component/Product/Products";
 import Search from "./component/Product/Search";
+import LoginSignUp from "./component/User/LoginSignUp";
 
 function App() {
 	useEffect(() => {
@@ -48,14 +49,18 @@ function App() {
 					path: "/products",
 					element: <Products />,
 				},
-                {
+				{
 					path: "/products/:keyword",
 					element: <Products />,
 				},
-                {
-                    path:"/search",
-                    element:<Search/>
-                }
+				{
+					path: "/search",
+					element: <Search />,
+				},
+				{
+					path: "/login",
+					element: <LoginSignUp />,
+				},
 			],
 		},
 	]);
