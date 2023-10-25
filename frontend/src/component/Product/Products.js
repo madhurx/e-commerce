@@ -10,6 +10,7 @@ import { useParams } from "react-router-dom";
 import Pagination from "react-js-pagination";
 import Slider from "@material-ui/core/Slider";
 import Typography from "@material-ui/core/Typography";
+import MetaData from "../layout/MetaData";
 
 const categories = [
 	"Laptop",
@@ -61,6 +62,7 @@ const Products = () => {
 				<Loader />
 			) : (
 				<div>
+					<MetaData title="PRODUCTS -- ECOMMERCE" />
 					<h2 className="productsHeading">Products</h2>
 
 					<div className="products">
