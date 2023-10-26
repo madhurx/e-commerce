@@ -5,17 +5,23 @@ const sendToken = require("../utils/jwtToken");
 const bcrypt = require("bcryptjs");
 const sendEmail = require("../utils/sendEmail");
 const crypto = require("crypto");
+const cloudinary = require("cloudinary");
 
 // Register a user
 const registerUser = catchAsyncError(async (req, res, next) => {
+	const myCloud = await cloudinary.v2.uploader.upload(req.files.avatar, {
+		folder: 'eCommerce/avatars',
+		width: 150,
+		crop: "scale",
+	});
 	const { name, email, password } = req.body;
 	const user = await User.create({
 		name,
 		email,
 		password,
 		avatar: {
-			public_id: "sample id",
-			url: "sampleUrl",
+			public_id: myCloud.public_id,
+			url: myCloud.secure_url,
 		},
 	});
 
@@ -189,7 +195,7 @@ const updateUserRole = catchAsyncError(async (req, res, next) => {
 		runValidators: true,
 		userFindAndModify: false,
 	});
-    if (!user) {
+	if (!user) {
 		return next(new ErrorHandler("user not found", 404));
 	}
 
