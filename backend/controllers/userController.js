@@ -9,6 +9,7 @@ const cloudinary = require("cloudinary");
 
 // Register a user
 const registerUser = catchAsyncError(async (req, res, next) => {
+    console.log("Register")
 	const myCloud = await cloudinary.v2.uploader.upload(
 		req.files.avatar.tempFilePath,
 		{
@@ -18,6 +19,7 @@ const registerUser = catchAsyncError(async (req, res, next) => {
 		},
 		function (error, result) {
 			const cloudinaryRes = error ? error : result;
+            console.log(cloudinaryRes)
 		},
 	);
 

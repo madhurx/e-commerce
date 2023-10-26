@@ -64,7 +64,7 @@ const userSlice = createSlice({
 				state.loading = false;
 				state.isAuthenticated = false;
 				state.userDetail = null;
-				state.error = action.payload.error;
+				state.error = action.payload?.error;
 				return state;
 			})
 			.addDefaultCase((state) => {
