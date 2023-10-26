@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import MailOutlineIcon from "@material-ui/icons/MailOutline";
 import LockOpenIcon from "@material-ui/icons/LockOpen";
 import FaceIcon from "@material-ui/icons/Face";
-import { login } from "../../utils/actions/userAction";
+import { login, register } from "../../utils/actions/userAction";
 import { clearErrors } from "../../utils/slices/userSlice";
 
 const LoginSignup = () => {
@@ -48,7 +48,7 @@ const LoginSignup = () => {
 		myForm.set("email", email);
 		myForm.set("password", password);
 		myForm.set("avatar", avatar);
-		// dispatch(register(myForm));
+		dispatch(register(myForm));
 	};
 
 	useEffect(() => {
