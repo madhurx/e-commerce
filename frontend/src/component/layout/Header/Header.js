@@ -5,7 +5,7 @@ import logo from "../../../images/logo.png";
 const Header = () => {
 	const Links = [
 		{
-			text: "Homree",
+			text: "Home",
 			url: "/",
 		},
 		{
@@ -30,8 +30,8 @@ const Header = () => {
 		logoHoverSize: "10px",
 		logoHoverColor: "#eb4034",
 		link1Text: Links[0].text,
-		link3Text: Links[1].text,
-		link2Text: Links[2].text,
+		link2Text: Links[1].text,
+		link3Text: Links[2].text,
 		link4Text: Links[3].text,
 		link1Url: Links[0].url,
 		link2Url: Links[1].url,

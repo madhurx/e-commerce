@@ -9,6 +9,7 @@ import ReviewCard from "./ReviewCard";
 import Loader from "../layout/Loader/Loader";
 import { useAlert } from "react-alert";
 import { clearErrors } from "../../utils/slices/productDetailSlice";
+import MetaData from "../layout/MetaData";
 
 const ProductDetails = () => {
 	const dispatch = useDispatch();
@@ -32,16 +33,14 @@ const ProductDetails = () => {
 		isHalf: true,
 		size: window.innerWidth < 600 ? 10 : 15,
 	};
-    
 
-
-    
 	return (
 		<div>
 			{loading ? (
 				<Loader />
 			) : (
 				<div>
+					<MetaData title={`${product.name} - ECOMMERCE`} />
 					<div className="ProductDetails ">
 						<div>
 							<Carousal>

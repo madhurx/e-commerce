@@ -5,9 +5,10 @@ import webFont from "webfontloader";
 import Footer from "./component/layout/Footer/Footer";
 import { Outlet, RouterProvider, createBrowserRouter } from "react-router-dom";
 import Home from "./component/Home/Home";
-import Loader from "./component/layout/Loader/Loader";
 import ProductDetails from "./component/Product/ProductDetails";
 import Products from "./component/Product/Products";
+import Search from "./component/Product/Search";
+import LoginSignUp from "./component/User/LoginSignUp";
 
 function App() {
 	useEffect(() => {
@@ -44,9 +45,21 @@ function App() {
 					path: "/product/:id",
 					element: <ProductDetails />,
 				},
-                {
+				{
 					path: "/products",
-					element: <Products/>,
+					element: <Products />,
+				},
+				{
+					path: "/products/:keyword",
+					element: <Products />,
+				},
+				{
+					path: "/search",
+					element: <Search />,
+				},
+				{
+					path: "/login",
+					element: <LoginSignUp />,
 				},
 			],
 		},
