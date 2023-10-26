@@ -28,6 +28,9 @@ const productDetailSlice = createSlice({
 			.addCase(getProductDetail.rejected, (state, action) => {
 				state.loading = false;
 				state.error = action.payload;
+			})
+			.addDefaultCase((state) => {
+				return state;
 			});
 	},
 });

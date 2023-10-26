@@ -35,6 +35,9 @@ const allProductsSlice = createSlice({
 			.addCase(getProducts.rejected, (state, action) => {
 				state.loading = false;
 				state.error = action.payload;
+			})
+			.addDefaultCase((state) => {
+				return state;
 			});
 	},
 });

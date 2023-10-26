@@ -41,6 +41,9 @@ const userSlice = createSlice({
 				state.userDetail = null;
 				state.error = action.payload.error;
 				return state;
+			})
+			.addDefaultCase((state) => {
+				return state;
 			});
 	},
 });
