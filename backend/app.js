@@ -15,7 +15,7 @@ const fileUpload = require("express-fileupload");
 
 app.use(cookieParser());
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(fileUpload());
+app.use(fileUpload({useTempFiles : true}));
 
 const corsOptions = {
 	origin: "*",

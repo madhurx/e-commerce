@@ -31,7 +31,7 @@ const LoginSignup = () => {
 
 	const { name, email, password } = user;
 
-	const { error, loading, isAuthenticated } = useSelector((state) => state.user);
+	const { error, isAuthenticated } = useSelector((state) => state.user);
 
 	const loginSubmit = (e) => {
 		e.preventDefault();
