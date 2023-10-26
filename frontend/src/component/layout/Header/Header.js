@@ -1,6 +1,9 @@
 import React from "react";
 import { ReactNavbar } from "overlay-navbar";
 import logo from "../../../images/logo.png";
+import { MdAccountCircle } from "react-icons/md";
+import { MdSearch } from "react-icons/md";
+import { MdAddShoppingCart } from "react-icons/md";
 
 const Header = () => {
 	const Links = [
@@ -53,6 +56,12 @@ const Header = () => {
 		searchIconColorHover: "#eb4034",
 		cartIconColorHover: "#eb4034",
 		cartIconMargin: "1vmax",
+		searchIcon: true,
+		SearchIconElement: MdSearch,
+		profileIcon: true,
+		ProfileIconElement: MdAccountCircle,
+		cartIcon: true,
+		CartIconElement: MdAddShoppingCart,
 	};
 
 	return <ReactNavbar {...options} />;
