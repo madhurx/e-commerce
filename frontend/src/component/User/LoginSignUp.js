@@ -39,18 +39,6 @@ const LoginSignup = () => {
 		dispatch(login(loginActionParams));
 	};
 
-	const registerSubmit = (e) => {
-		e.preventDefault();
-
-		const myForm = new FormData();
-
-		myForm.set("name", name);
-		myForm.set("email", email);
-		myForm.set("password", password);
-		myForm.set("avatar", avatar);
-		dispatch(register(myForm));
-	};
-
 	useEffect(() => {
 		if (error) {
 			alert.error(error);
@@ -94,6 +82,19 @@ const LoginSignup = () => {
 		} else {
 			setUser({ ...user, [e.target.name]: e.target.value });
 		}
+	};
+    
+    const registerSubmit = (e) => {
+		e.preventDefault();
+
+		const formData = new FormData();
+		formData.append("name", name);
+		formData.append("email", email);
+		formData.append("password", password);
+		formData.append("avatar", avatar);
+        const loginActionParams = {formData};
+        
+		dispatch(register(loginActionParams));
 	};
 
 	return (
