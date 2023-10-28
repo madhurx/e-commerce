@@ -8,30 +8,26 @@ const crypto = require("crypto");
 const cloudinary = require("cloudinary");
 
 // Register a user
-const registerUser = catchAsyncError(async (req, res, next) => {    
-    console.log("Register")
-    console.log(req.body)
+const registerUser = catchAsyncError(async (req, res, next) => {
 	const myCloud = await cloudinary.v2.uploader.upload(
 		req.body.avatar,
 		{
-			folder: "eCommerce",
+			folder: "eCommerce/avatars",
 			width: 150,
 			crop: "scale",
 		},
 		function (error, result) {
 			const cloudinaryRes = error ? error : result;
-            console.log(cloudinaryRes)
 		},
 	);
-    console.log("Register2")
 	const { name, email, password } = req.body;
 	const user = await User.create({
 		name,
 		email,
 		password,
 		avatar: {
-			public_id: 12,
-			url: "sad"
+			public_id: myCloud.public_id,
+			url: myCloud.secure_url,
 		},
 	});
 
@@ -51,7 +47,7 @@ const loginUser = catchAsyncError(async (req, res, next) => {
 		return next(new ErrorHandler("Invalid email or password", 401));
 	}
 
-	const isPasswordMatched = await bcrypt.compare(password, user.password);
+	const isPasswordMatched = bcrypt.compare(password, user.password);
 	if (!isPasswordMatched) {
 		return next(new ErrorHandler("Invalid email or password", 401));
 	}
