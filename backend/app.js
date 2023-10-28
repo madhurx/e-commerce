@@ -12,15 +12,22 @@ const order = require("./routes/orderRoute");
 const cookieParser = require("cookie-parser");
 const bodyParser = require("body-parser");
 const fileUpload = require("express-fileupload");
-
-app.use(cookieParser());
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(fileUpload({useTempFiles : true}));
+const multer = require('multer');
 
 const corsOptions = {
 	origin: "*",
 };
+
+// app.use(fileUpload({useTempFiles : true, debug: true}));
+app.use(cookieParser());
+
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
 app.use(cors(corsOptions));
+
+app.use(multer().any());
+
+
 
 app.use("/api/v1", product);
 app.use("/api/v1", user);

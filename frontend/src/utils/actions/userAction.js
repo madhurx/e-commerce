@@ -18,18 +18,19 @@ export const login = createAsyncThunk("userLoginSlice", async (loginActionParams
 	}
 });
 
-export const register = createAsyncThunk("userRegisterSlice", async (myForm) => {
+export const register = createAsyncThunk("userRegisterSlice", async (loginActionParams) => {
 	try {
-		// let { email, password, name, avatar } = loginActionParams;
+		let {formData  } = loginActionParams;
+        // const a = new FormData(myForm);
+console.log(loginActionParams);
+// console.log("CV");
 
 		const data = await fetch(`/api/v1/register`, {
 			method: "POST",
-			headers: {
-				"Content-Type": "application/json",
-			},
-			body: new FormData(myForm)
+			body: formData
 		});
 		const result = await data.json()
+        console.log(result)
 		return result;
 	} catch (error) {
 		throw error;
