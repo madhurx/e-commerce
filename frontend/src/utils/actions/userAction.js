@@ -11,7 +11,7 @@ export const login = createAsyncThunk("userLoginSlice", async (loginActionParams
 			},
 			body: JSON.stringify({ email, password }),
 		});
-		const result = await data.json()
+		const result = await data.json();
 		return result;
 	} catch (error) {
 		throw error;
@@ -20,14 +20,14 @@ export const login = createAsyncThunk("userLoginSlice", async (loginActionParams
 
 export const register = createAsyncThunk("userRegisterSlice", async (registerActionParams) => {
 	try {
-		let {formData  } = registerActionParams;
+		let { formData } = registerActionParams;
 
 		const data = await fetch(`/api/v1/register`, {
 			method: "POST",
-			body: formData
+			body: formData,
 		});
-		const result = await data.json()
-        console.log(result)
+		const result = await data.json();
+		console.log(result);
 		return result;
 	} catch (error) {
 		throw error;
@@ -35,12 +35,21 @@ export const register = createAsyncThunk("userRegisterSlice", async (registerAct
 });
 
 export const loadUser = createAsyncThunk("userLoadSlice", async () => {
-
-    try {
-        const data = await fetch(`/api/v1/me`);
-		const result = await data.json()
-return result;
+	try {
+		const data = await fetch(`/api/v1/me`);
+		const result = await data.json();
+		return result;
 	} catch (error) {
 		throw error;
 	}
-})
+});
+
+export const logout = createAsyncThunk("userLogout", async () => {
+	try {
+		const data = await fetch(`/api/v1/logout`);
+		const result = await data.json();
+		return result;
+	} catch (error) {
+		throw error;
+	}
+});

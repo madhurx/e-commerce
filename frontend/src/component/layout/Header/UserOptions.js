@@ -10,9 +10,11 @@ import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
 import { useNavigate } from "react-router-dom";
 import { useAlert } from "react-alert";
 import { useDispatch, useSelector } from "react-redux";
+import { logout } from "../../../utils/actions/userAction";
 
 const UserOptions = ({ user }) => {
 	const [open, setOpen] = useState(false);
+
 	const navigate = useNavigate();
 	const alert = useAlert();
 	const dispatch = useDispatch();
@@ -24,7 +26,7 @@ const UserOptions = ({ user }) => {
 		{ icon: <ExitToAppIcon />, name: "Logout", func: logoutUser },
 	];
 
-	if (user.role === "admin") {
+	if (user?.data?.role === "admin") {
 		options.unshift({
 			icon: <DashboardIcon />,
 			name: "Dashboard",
@@ -45,12 +47,13 @@ const UserOptions = ({ user }) => {
 		navigate("/cart");
 	}
 	function logoutUser() {
-		// dispatch(logout());
+		dispatch(logout());
 		alert.success("Logout Successfully");
 	}
 
 	return (
 		<>
+			<Backdrop open={open} style={{ zIndex: "10" }} />
 			<SpeedDial
 				ariaLabel="SpeedDial tooltip example"
 				onClose={() => setOpen(false)}

@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { loadUser, login, register } from "../actions/userAction";
+import { loadUser, login, logout, register } from "../actions/userAction";
 
 const userSlice = createSlice({
 	name: "user",
@@ -90,6 +90,21 @@ const userSlice = createSlice({
 				state.isAuthenticated = false;
 				state.userDetail = null;
 				state.error = action.payload?.error;
+			})
+            .addCase(logout.fulfilled, (state, action) => {
+				state.loading = false;
+				if (action.payload.success === true) {
+					state.isAuthenticated = true;
+				} else {
+					state.isAuthenticated = false;
+				}
+				state.error = action.payload.error;
+				state.userDetail = null
+			})
+			.addCase(logout.rejected, (state, action) => {
+				state.loading = false;
+				state.error = action.payload?.error;
+                return state;
 			})
 			.addDefaultCase((state) => {
 				return state;
