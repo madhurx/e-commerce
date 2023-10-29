@@ -92,9 +92,9 @@ const LoginSignup = () => {
 		formData.append("email", email);
 		formData.append("password", password);
 		formData.append("avatar", avatar);
-        const loginActionParams = {formData};
+        const registerActionParams = {formData};
         
-		dispatch(register(loginActionParams));
+		dispatch(register(registerActionParams));
 	};
 
 	return (
