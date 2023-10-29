@@ -9,8 +9,14 @@ import ProductDetails from "./component/Product/ProductDetails";
 import Products from "./component/Product/Products";
 import Search from "./component/Product/Search";
 import LoginSignUp from "./component/User/LoginSignUp";
+import store from "./utils/store";
+import { loadUser } from "./utils/actions/userAction";
+import { useSelector } from "react-redux";
+import UserOptions from "./component/layout/Header/UserOptions";
 
 function App() {
+	const { userDetail, isAuthenticated } = useSelector((state) => state.user);
+
 	useEffect(() => {
 		webFont.load({
 			google: {
@@ -21,11 +27,13 @@ function App() {
 				],
 			},
 		});
+		store.dispatch(loadUser());
 	}, []);
 
 	const AppLayout = () => {
 		return (
 			<div className="flex flex-col">
+				{isAuthenticated && <UserOptions user={userDetail} />}
 				<Header />
 				<Outlet />
 				<Footer />
