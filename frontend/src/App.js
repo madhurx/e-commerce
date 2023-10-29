@@ -13,6 +13,7 @@ import store from "./utils/store";
 import { loadUser } from "./utils/actions/userAction";
 import { useSelector } from "react-redux";
 import UserOptions from "./component/layout/Header/UserOptions";
+import Profile from "./component/User/Profile";
 
 function App() {
 	const { userDetail, isAuthenticated } = useSelector((state) => state.user);
@@ -68,6 +69,10 @@ function App() {
 				{
 					path: "/login",
 					element: <LoginSignUp />,
+				},
+                {
+					path: "/account",
+					element: <Profile />,
 				},
 			],
 		},
