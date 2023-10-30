@@ -7,7 +7,7 @@ import Loader from "../layout/Loader/Loader";
 
 const Profile = () => {
 	const { userDetail, loading, isAuthenticated } = useSelector((state) => state.user);
-	const user = userDetail.data;
+	const user = userDetail?.data;
     const navigate = useNavigate();
 
     useEffect( () =>{

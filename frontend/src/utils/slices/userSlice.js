@@ -94,9 +94,9 @@ const userSlice = createSlice({
             .addCase(logout.fulfilled, (state, action) => {
 				state.loading = false;
 				if (action.payload.success === true) {
-					state.isAuthenticated = true;
-				} else {
 					state.isAuthenticated = false;
+				} else {
+					state.isAuthenticated = true;
 				}
 				state.error = action.payload.error;
 				state.userDetail = null
