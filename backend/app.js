@@ -8,32 +8,31 @@ const errorMiddleware = require("./middleware/error");
 const product = require("./routes/productRoute");
 const user = require("./routes/userRoute");
 const order = require("./routes/orderRoute");
+const Busboy = require('busboy');
+const busboy = require('express-busboy');
 
 const cookieParser = require("cookie-parser");
 const bodyParser = require("body-parser");
-const fileUpload = require("express-fileupload");
-const multer = require('multer');
 
 const corsOptions = {
 	origin: "*",
 };
+busboy.extend(app, {
+    upload: true,
+    path: '/',
+    allowedPath: /./,
+});
 
-// app.use(fileUpload({useTempFiles : true, debug: true}));
 app.use(cookieParser());
 
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(cors(corsOptions));
-
-app.use(multer().any());
-
-
 
 app.use("/api/v1", product);
 app.use("/api/v1", user);
 app.use("/api/v1", order);
 
-//middleware for error
 app.use(errorMiddleware);
 
 module.exports = app;

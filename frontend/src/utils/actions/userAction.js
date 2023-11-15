@@ -1,4 +1,5 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
+import axios from 'axios';
 
 export const login = createAsyncThunk("userLoginSlice", async (loginActionParams) => {
 	try {
@@ -21,15 +22,24 @@ export const login = createAsyncThunk("userLoginSlice", async (loginActionParams
 export const register = createAsyncThunk("userRegisterSlice", async (registerActionParams) => {
 	try {
 		let { formData } = registerActionParams;
+        console.log("ACTIopn")
 
-		const data = await fetch(`/api/v1/register`, {
-			method: "POST",
-			body: formData,
-		});
-		const result = await data.json();
-		console.log(result);
-		return result;
+        const response = await axios.post("/api/v1/register", formData, {
+            headers: {
+                "Content-Type": "multipart/form-data"
+            }
+        });
+
+        console.log("Response:", response.data);
+        return response.data
+
+		// const { data } = await axios.post(`/api/v1/register`, formData, {
+		// 	headers: { ...formData.getHeaders()},
+		// });
+		// console.log(data);
+		// return data;
 	} catch (error) {
+        console.log(error.response.data)
 		throw error;
 	}
 });

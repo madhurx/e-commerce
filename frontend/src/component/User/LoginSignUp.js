@@ -8,6 +8,7 @@ import LockOpenIcon from "@material-ui/icons/LockOpen";
 import FaceIcon from "@material-ui/icons/Face";
 import { login, register } from "../../utils/actions/userAction";
 import { clearErrors } from "../../utils/slices/userSlice";
+const FormData = require('form-data');
 
 const LoginSignup = () => {
 	const dispatch = useDispatch();

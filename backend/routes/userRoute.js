@@ -14,9 +14,11 @@ const {
 	deleteUser,
 } = require("../controllers/userController");
 const { isAuthenticatedUser, authorizedRoles } = require("../middleware/auth");
+const handleFileUpload = require("../middleware/upload");
+
 const router = express.Router();
 
-router.post("/register", registerUser);
+router.post("/register" , registerUser);
 router.post("/login", loginUser);
 router.get("/logout", logOut);
 router.post("/password/forgot", forgetPassword);
