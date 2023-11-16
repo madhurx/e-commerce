@@ -18,7 +18,7 @@ const handleFileUpload = require("../middleware/upload");
 
 const router = express.Router();
 
-router.post("/register" , registerUser);
+router.post("/register" ,handleFileUpload, registerUser);
 router.post("/login", loginUser);
 router.get("/logout", logOut);
 router.post("/password/forgot", forgetPassword);
