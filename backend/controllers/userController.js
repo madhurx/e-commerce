@@ -8,9 +8,9 @@ const crypto = require("crypto");
 const cloudinary = require("cloudinary");
 
 // Register a user
-const registerUser = catchAsyncError(async (req, res, next) => {
+const registerUser = catchAsyncError(async (req, res) => {
     console.log(req.files);
-    console.log(req.file);
+    // console.log(req.file);
     console.log(req.body);
     
 	const myCloud = await cloudinary.v2.uploader.upload(

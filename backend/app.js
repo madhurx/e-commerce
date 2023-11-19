@@ -17,11 +17,11 @@ const bodyParser = require("body-parser");
 const corsOptions = {
 	origin: "*",
 };
-busboy.extend(app, {
-    upload: true,
-    path: '/',
-    allowedPath: /./,
-});
+// busboy.extend(app, {
+//     upload: true,
+//     path: '/',
+//     allowedPath: /./,
+// });
 
 app.use(cookieParser());
 

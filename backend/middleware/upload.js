@@ -33,24 +33,45 @@
 // module.exports = handleFileUpload;
 
 const formidable = require("formidable");
+const fs = require('fs');
+
+
 function handleFileUpload(req, res, next) {
 	const form = new formidable.IncomingForm();
+    form.uploadDir = __dirname + '/uploads'; // Set your upload directory
+
 	form.parse(req, function (err, fields, files) {
-		let oldPath = files.profilePic.filepath;
-		let newPath = path.join(__dirname, "uploads") + "/" + files.profilePic.name;
-		let rawData = fs.readFileSync(oldPath);
+		// let oldPath = files.profilePic.filepath;
+		// let newPath = path.join(__dirname, "uploads") + "/" + files.profilePic.name;
+		// let rawData = fs.readFileSync(oldPath);
 
-		fs.writeFile(newPath, rawData, function (err) {
-			if (err) {
-				req.fileError = err;
-				console.log(err);
-			} else {
-				req.fileError = { msg: "Successfully uploaded" };
-				// return res.send("Successfully uploaded")
-			}
+		// fs.writeFile(newPath, rawData, function (err) {
+		// 	if (err) {
+		// 		req.fileError = err;
+		// 		console.log(err);
+		// 	} else {
+		// 		req.body = fields;
+		// 		req.files = files;
+		// 		req.fileError = { msg: "Successfully uploaded" };
+		// 		// return res.send("Successfully uploaded")
+		// 	}
 
-			next();
-		});
+		// 	next();
+		// });
+
+        if (err) {
+            return next(err); // Pass the error to the error handler
+          }
+      
+          // Add parsed form data to request object
+          req.body = fields;
+          req.files = files;
+          console.log('Parsed form data:', req.files);
+
+      
+          next(); // Move to the next middleware or route handler
+        
+
 	});
 }
-module.exports = { handleFileUpload };
+module.exports =  handleFileUpload ;
