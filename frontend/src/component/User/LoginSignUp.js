@@ -180,6 +180,7 @@ const LoginSignup = () => {
 								type="file"
 								name="avatar"
 								accept="image/*"
+                                src={avatar}
 								onChange={registerDataChange}
 							/>
 						</div>
