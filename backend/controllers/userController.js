@@ -6,25 +6,35 @@ const bcrypt = require("bcryptjs");
 const sendEmail = require("../utils/sendEmail");
 const crypto = require("crypto");
 const cloudinary = require("cloudinary");
+const { Readable } = require('stream');
 
 // Register a user
 const registerUser = catchAsyncError(async (req, res) => {
-    console.log(req.files);
-    // console.log(req.file);
-    console.log(req.body);
     
-	const myCloud = await cloudinary.v2.uploader.upload(
-		req.body.avatar,
-		{
-			folder: "eCommerce/avatars",
-			width: 150,
-			crop: "scale",
-		},
-		function (error, result) {
-			const cloudinaryRes = error ? error : result;
-		},
-	);
-    console.log("a")
+	const fileStream = new Readable();
+	fileStream.push(req.file.buffer);
+	fileStream.push(null);
+
+	const myCloud = await new Promise((resolve, reject) => {
+		const uploadStream = cloudinary.v2.uploader.upload_stream(
+			{ folder: "eCommerce/avatars", width: 150, crop: "scale" },
+			(error, result) => {
+				if (error) {
+					console.log("errorrr");
+					console.log(error);
+					reject(error);
+				} else {
+					console.log("uploadeddd", result);
+					resolve(result);
+				}
+			},
+		);
+
+		fileStream.pipe(uploadStream);
+	});
+
+	console.log(myCloud);
+
 	const { name, email, password } = req.body;
 	const user = await User.create({
 		name,

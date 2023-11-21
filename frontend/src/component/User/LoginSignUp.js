@@ -70,6 +70,9 @@ const LoginSignup = () => {
 
 	const registerDataChange = (e) => {
 		if (e.target.name === "avatar") {
+
+            const selectedFile = e.target.files && e.target.files[0];
+            if (selectedFile) {
 			const reader = new FileReader();
 
 			reader.onload = () => {
@@ -80,6 +83,7 @@ const LoginSignup = () => {
 			};
 
 			reader.readAsDataURL(e.target.files[0]);
+        }
 		} else {
 			setUser({ ...user, [e.target.name]: e.target.value });
 		}
@@ -88,7 +92,7 @@ const LoginSignup = () => {
     const registerSubmit = (e) => {
 		e.preventDefault();
 
-		const formData = new FormData();
+		const formData = new FormData(e.target);
 		formData.append("name", name);
 		formData.append("email", email);
 		formData.append("password", password);
@@ -180,7 +184,6 @@ const LoginSignup = () => {
 								type="file"
 								name="avatar"
 								accept="image/*"
-                                src={avatar}
 								onChange={registerDataChange}
 							/>
 						</div>
