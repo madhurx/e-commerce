@@ -1,4 +1,5 @@
 const express = require("express");
+const router = express.Router();
 const {
 	registerUser,
 	loginUser,
@@ -14,11 +15,13 @@ const {
 	deleteUser,
 } = require("../controllers/userController");
 const { isAuthenticatedUser, authorizedRoles } = require("../middleware/auth");
-const handleFileUpload = require("../middleware/upload");
 
-const router = express.Router();
+const multer = require("multer");
 
-router.post("/register" ,handleFileUpload, registerUser);
+const storage = multer.memoryStorage();
+const upload = multer({ storage: storage });
+
+router.post("/register", upload.single("avatar"), registerUser);
 router.post("/login", loginUser);
 router.get("/logout", logOut);
 router.post("/password/forgot", forgetPassword);
