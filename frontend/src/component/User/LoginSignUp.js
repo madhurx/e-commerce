@@ -93,6 +93,8 @@ const LoginSignup = () => {
 		e.preventDefault();
 
 		const formData = new FormData(e.target);
+        formData.delete("name");
+        formData.delete("email");formData.delete("password");
 		formData.append("name", name);
 		formData.append("email", email);
 		formData.append("password", password);

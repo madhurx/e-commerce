@@ -22,10 +22,10 @@ export const login = createAsyncThunk("userLoginSlice", async (loginActionParams
 export const register = createAsyncThunk("userRegisterSlice", async (registerActionParams) => {
 	try {
 		let { formData } = registerActionParams;
-        console.log(formData.entries())
-        for (const entry of formData.entries()) {
-            console.log(entry);
-          }
+        
+        // for (const entry of formData.entries()) {
+        //     console.log(entry);
+        //   }
 
         const response = await axios.post("/api/v1/register", formData, {
             headers: {

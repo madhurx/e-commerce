@@ -6,47 +6,66 @@ const bcrypt = require("bcryptjs");
 const sendEmail = require("../utils/sendEmail");
 const crypto = require("crypto");
 const cloudinary = require("cloudinary");
-const { Readable } = require('stream');
+const { Readable } = require("stream");
 
 // Register a user
 const registerUser = catchAsyncError(async (req, res) => {
-    
-	const fileStream = new Readable();
-	fileStream.push(req.file.buffer);
-	fileStream.push(null);
+	let myCloud;
+	let user;
 
-	const myCloud = await new Promise((resolve, reject) => {
-		const uploadStream = cloudinary.v2.uploader.upload_stream(
-			{ folder: "eCommerce/avatars", width: 150, crop: "scale" },
-			(error, result) => {
-				if (error) {
-					console.log("errorrr");
-					console.log(error);
-					reject(error);
-				} else {
-					console.log("uploadeddd", result);
-					resolve(result);
-				}
+	try {
+		myCloud = {
+			public_id: "eCommerce/avatars/defaultAvatar",
+			secure_url:
+				"https://res.cloudinary.com/dvmcof50f/image/upload/v1700482639/eCommerce/avatars/defaultAvatar.png",
+		};
+
+		if (req.file != undefined) {
+			const fileStream = new Readable();
+			fileStream.push(req.file.buffer);
+			fileStream.push(null);
+
+			myCloud = await new Promise((resolve, reject) => {
+				const uploadStream = cloudinary.v2.uploader.upload_stream(
+					{ folder: "eCommerce/avatars", width: 150, crop: "scale" },
+					(error, result) => {
+						if (error) {
+							reject(error);
+						} else {
+							resolve(result);
+						}
+					},
+				);
+
+				fileStream.pipe(uploadStream);
+			});
+		}
+
+		const { name, email, password } = req.body;
+		user = await User.create({
+			name,
+			email,
+			password,
+			avatar: {
+				public_id: myCloud.public_id,
+				url: myCloud.secure_url,
 			},
-		);
+		});
 
-		fileStream.pipe(uploadStream);
-	});
-
-	console.log(myCloud);
-
-	const { name, email, password } = req.body;
-	const user = await User.create({
-		name,
-		email,
-		password,
-		avatar: {
-			public_id: myCloud.public_id,
-			url: myCloud.secure_url,
-		},
-	});
-
-	sendToken(user, 201, res);
+		sendToken(user, 201, res);
+	} catch (error) {
+		sendToken(error, 400, res);
+	} finally {
+		if (user == undefined) {
+			cloudinary.v2.uploader.destroy(myCloud.public_id, (error, result) => {
+				if (error) {
+					console.error("Error deleting image from Cloudinary:", error);
+				} else {
+					console.log("Image deleted from Cloudinary", result);
+				}
+			});
+		}
+	}
 });
 
 //login user
