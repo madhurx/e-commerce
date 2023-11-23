@@ -7,18 +7,18 @@ import Loader from "../layout/Loader/Loader";
 
 const Profile = () => {
 	const { userDetail, loading, isAuthenticated } = useSelector((state) => state.user);
-    // console.log(userDetail, loading, isAuthenticated)
+	// console.log(userDetail, loading, isAuthenticated)
 	const user = userDetail?.user;
-    const navigate = useNavigate();
+	const navigate = useNavigate();
 
-    useEffect( () =>{
-        if(isAuthenticated === false){
-            navigate('/login')
-        }
-    }, [navigate, isAuthenticated]);
+	useEffect(() => {
+		if (isAuthenticated === false) {
+			navigate("/login");
+		}
+	}, [navigate, isAuthenticated]);
 
-    // useEffect(() => {
-    //  }, [userDetail]);
+	// useEffect(() => {
+	//  }, [userDetail]);
 
 	return (
 		<>
