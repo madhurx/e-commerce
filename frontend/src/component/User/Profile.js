@@ -7,27 +7,31 @@ import Loader from "../layout/Loader/Loader";
 
 const Profile = () => {
 	const { userDetail, loading, isAuthenticated } = useSelector((state) => state.user);
-	const user = userDetail?.data;
+    // console.log(userDetail, loading, isAuthenticated)
+	const user = userDetail?.user;
     const navigate = useNavigate();
 
     useEffect( () =>{
         if(isAuthenticated === false){
             navigate('/login')
         }
-    }, [navigate, isAuthenticated])
+    }, [navigate, isAuthenticated]);
+
+    // useEffect(() => {
+    //  }, [userDetail]);
 
 	return (
 		<>
 			{loading ? (
 				<Loader />
-			) : (
+			) : user ? (
 				<>
 					<MetaData title={`${user?.name}'s Profile`} />
 					<div className="profileContainer">
 						<div>
 							<h1>My Profile</h1>
 							<img
-								src={user?.avatar.url ? user.avatar.url : "/profile.png"}
+								src={user?.avatar?.url ? user?.avatar?.url : "/profile.png"}
 								alt={user?.name}
 							/>
 							<Link to="/me/update">Edit Profile</Link>
@@ -53,7 +57,7 @@ const Profile = () => {
 						</div>
 					</div>
 				</>
-			)}
+			) : null}
 		</>
 	);
 };

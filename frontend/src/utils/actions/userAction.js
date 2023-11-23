@@ -35,12 +35,6 @@ export const register = createAsyncThunk("userRegisterSlice", async (registerAct
 
         console.log("Response:", response.data);
         return response.data
-
-		// const { data } = await axios.post(`/api/v1/register`, formData, {
-		// 	headers: { ...formData.getHeaders()},
-		// });
-		// console.log(data);
-		// return data;
 	} catch (error) {
         console.log(error.response.data)
 		throw error;
