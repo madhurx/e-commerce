@@ -22,7 +22,7 @@ export const login = createAsyncThunk("userLoginSlice", async (loginActionParams
 export const register = createAsyncThunk("userRegisterSlice", async (registerActionParams) => {
 	try {
 		let { formData } = registerActionParams;
-        
+
         // for (const entry of formData.entries()) {
         //     console.log(entry);
         //   }
