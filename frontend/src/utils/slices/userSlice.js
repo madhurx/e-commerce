@@ -91,26 +91,24 @@ const userSlice = createSlice({
 				state.userDetail = null;
 				state.error = action.payload?.error;
 			})
-            .addCase(logout.fulfilled, (state, action) => {
+			.addCase(logout.fulfilled, (state, action) => {
 				state.loading = false;
 				// if (action.payload.success === true) {
 				// 	state.isAuthenticated = false;
 				// } else {
 				// 	state.isAuthenticated = true;
 				// }
-                state.isAuthenticated = false; // Always set to false on successful logout
+				state.isAuthenticated = false; // Always set to false on successful logout
 				state.error = action.payload.error;
-				state.userDetail = null
+				state.userDetail = null;
 			})
 			.addCase(logout.rejected, (state, action) => {
 				state.loading = false;
-                state.isAuthenticated = false; // Set to false or true based on your use case
+				state.isAuthenticated = false; // Set to false or true based on your use case
 				state.error = action.payload?.error;
-                return state;
+				return state;
 			})
-			.addDefaultCase((state) => 
-				 state
-			);
+			.addDefaultCase((state) => state);
 	},
 });
 
