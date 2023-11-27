@@ -5,8 +5,8 @@ import { useAlert } from "react-alert";
 import { useDispatch, useSelector } from "react-redux";
 import MailOutlineIcon from "@material-ui/icons/MailOutline";
 import FaceIcon from "@material-ui/icons/Face";
-import { login, register } from "../../utils/actions/userAction";
-import { clearErrors } from "../../utils/slices/userSlice";
+import { loadUser, login, register } from "../../utils/actions/userAction";
+import { clearErrors } from "../../utils/slices/profileSlice";
 const FormData = require("form-data");
 
 const UpdateProfile = () => {
@@ -42,7 +42,6 @@ const UpdateProfile = () => {
 	};
 
 	const registerDataChange = (e) => {
-		if (e.target.name === "avatar") {
 			const selectedFile = e.target.files && e.target.files[0];
 			if (selectedFile) {
 				const reader = new FileReader();
@@ -56,9 +55,7 @@ const UpdateProfile = () => {
 
 				reader.readAsDataURL(e.target.files[0]);
 			}
-		} else {
-			// setUser({ ...user, [e.target.name]: e.target.value });
-		}
+		
 	};
 
 	useEffect(() => {
@@ -66,10 +63,13 @@ const UpdateProfile = () => {
 			alert.error(error);
 			dispatch(clearErrors);
 		}
-		if (isAuthenticated) {
+		if (isUpdated) {
+            alert.success("Profile Updated Successfully");
+            dispatch(loadUser);
 			navigate("/account");
+            dispatch()
 		}
-	}, [dispatch, error, alert, isAuthenticated, navigate]);
+	}, [dispatch, error, alert, isUpdated, navigate]);
 
 	return <div></div>;
 };
