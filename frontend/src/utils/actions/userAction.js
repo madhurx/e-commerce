@@ -1,5 +1,5 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import axios from 'axios';
+import axios from "axios";
 
 export const login = createAsyncThunk("userLoginSlice", async (loginActionParams) => {
 	try {
@@ -23,20 +23,20 @@ export const register = createAsyncThunk("userRegisterSlice", async (registerAct
 	try {
 		let { formData } = registerActionParams;
 
-        // for (const entry of formData.entries()) {
-        //     console.log(entry);
-        //   }
+		// for (const entry of formData.entries()) {
+		//     console.log(entry);
+		//   }
 
-        const response = await axios.post("/api/v1/register", formData, {
-            headers: {
-                "Content-Type": "multipart/form-data"
-            }
-        });
+		const response = await axios.post("/api/v1/register", formData, {
+			headers: {
+				"Content-Type": "multipart/form-data",
+			},
+		});
 
-        console.log("Response:", response.data);
-        return response.data
+		console.log("Response:", response.data);
+		return response.data;
 	} catch (error) {
-        console.log(error.response.data)
+		console.log(error.response.data);
 		throw error;
 	}
 });
@@ -54,6 +54,16 @@ export const loadUser = createAsyncThunk("userLoadSlice", async () => {
 export const logout = createAsyncThunk("userLogout", async () => {
 	try {
 		const data = await fetch(`/api/v1/logout`);
+		const result = await data.json();
+		return result;
+	} catch (error) {
+		throw error;
+	}
+});
+
+export const updateProfile = createAsyncThunk("updateProfileSlice", async () => {
+	try {
+		const data = await fetch(`/api/v1/me/update`);
 		const result = await data.json();
 		return result;
 	} catch (error) {

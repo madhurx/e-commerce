@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { updateProfile } from "../actions/userAction";
 
 const profileSlice = createSlice({
 	name: "profile",
@@ -13,6 +14,24 @@ const profileSlice = createSlice({
 		clearErrors: (state) => {
 			state.error = null;
 			return state;
+		},
+		extraReducers: (builder) => {
+			builder
+				.addCase(updateProfile.pending, (state) => {
+					state.loading = false;
+					return state;
+				})
+				.addCase(updateProfile.fulfilled, (state, action) => {
+					state.loading = false;
+					state.isUpdated = action.payload;
+					return state;
+				})
+				.addCase(updateProfile.rejected, (state, action) => {
+					state.loading = false;
+					state.error = action.payload;
+					return state;
+				})
+                ;
 		},
 	},
 });
