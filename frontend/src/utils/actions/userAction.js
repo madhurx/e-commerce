@@ -33,7 +33,7 @@ export const register = createAsyncThunk("userRegisterSlice", async (registerAct
 			},
 		});
 
-		console.log("Response:", response.data);
+		// console.log("Response:", response.data);
 		return response.data;
 	} catch (error) {
 		console.log(error.response.data);
@@ -61,12 +61,26 @@ export const logout = createAsyncThunk("userLogout", async () => {
 	}
 });
 
-export const updateProfile = createAsyncThunk("updateProfileSlice", async () => {
-	try {
-		const data = await fetch(`/api/v1/me/update`);
-		const result = await data.json();
-		return result;
-	} catch (error) {
-		throw error;
-	}
-});
+export const updateProfile = createAsyncThunk(
+	"updateProfileSlice",
+	async (updateProfileActionParams) => {
+		try {
+			let { formData } = updateProfileActionParams;
+            for (const entry of formData.entries()) {
+                    console.log(entry);
+                  }
+			const response = await axios.put("/api/v1/me/update", formData, {
+				headers: {
+					"Content-Type": "multipart/form-data",
+				},
+			});
+			return response.data;
+
+			// const data = await fetch(`/api/v1/me/update`);
+			// const result = await data.json();
+			// return result;
+		} catch (error) {
+			throw error;
+		}
+	},
+);

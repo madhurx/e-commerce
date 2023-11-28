@@ -189,6 +189,40 @@ const updateProfile = catchAsyncError(async (req, res, next) => {
 		name: req.body.name,
 		email: req.body.email,
 	};
+
+	if (req.body.avatar !== "") {
+		const user = await User.findById(req.user.id);
+
+		const imageId = user.avatar.public_id;
+
+		await cloudinary.v2.uploader.destroy(imageId);
+
+		if (req.file != undefined) {
+			const fileStream = new Readable();
+			fileStream.push(req.file.buffer);
+			fileStream.push(null);
+
+			myCloud = await new Promise((resolve, reject) => {
+				const uploadStream = cloudinary.v2.uploader.upload_stream(
+					{ folder: "eCommerce/avatars", width: 150, crop: "scale" },
+					(error, result) => {
+						if (error) {
+							reject(error);
+						} else {
+							resolve(result);
+						}
+					},
+				);
+
+				fileStream.pipe(uploadStream);
+			});
+		}
+		newUserData.avatar = {
+			public_id: myCloud.public_id,
+			url: myCloud.secure_url,
+		};
+	}
+
 	const user = await User.findByIdAndUpdate(req.user.id, newUserData, {
 		new: true,
 		runValidators: true,

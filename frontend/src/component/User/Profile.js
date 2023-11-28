@@ -8,7 +8,7 @@ import Loader from "../layout/Loader/Loader";
 const Profile = () => {
 	const { userDetail, loading, isAuthenticated } = useSelector((state) => state.user);
 	// console.log(userDetail, loading, isAuthenticated)
-	const user = userDetail?.user;
+	const user = userDetail?.data;
 	const navigate = useNavigate();
 
 	useEffect(() => {
@@ -17,8 +17,6 @@ const Profile = () => {
 		}
 	}, [navigate, isAuthenticated]);
 
-	// useEffect(() => {
-	//  }, [userDetail]);
 
 	return (
 		<>
@@ -57,7 +55,7 @@ const Profile = () => {
 						</div>
 					</div>
 				</>
-			) : null}
+			) : null }
 		</>
 	);
 };
