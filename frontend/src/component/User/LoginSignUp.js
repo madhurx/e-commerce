@@ -8,7 +8,7 @@ import LockOpenIcon from "@material-ui/icons/LockOpen";
 import FaceIcon from "@material-ui/icons/Face";
 import { login, register } from "../../utils/actions/userAction";
 import { clearErrors } from "../../utils/slices/userSlice";
-const FormData = require('form-data');
+const FormData = require("form-data");
 
 const LoginSignup = () => {
 	const dispatch = useDispatch();
@@ -70,37 +70,37 @@ const LoginSignup = () => {
 
 	const registerDataChange = (e) => {
 		if (e.target.name === "avatar") {
+			const selectedFile = e.target.files && e.target.files[0];
+			if (selectedFile) {
+				const reader = new FileReader();
 
-            const selectedFile = e.target.files && e.target.files[0];
-            if (selectedFile) {
-			const reader = new FileReader();
+				reader.onload = () => {
+					if (reader.readyState === 2) {
+						setAvatarPreview(reader.result);
+						setAvatar(reader.result);
+					}
+				};
 
-			reader.onload = () => {
-				if (reader.readyState === 2) {
-					setAvatarPreview(reader.result);
-					setAvatar(reader.result);
-				}
-			};
-
-			reader.readAsDataURL(e.target.files[0]);
-        }
+				reader.readAsDataURL(e.target.files[0]);
+			}
 		} else {
 			setUser({ ...user, [e.target.name]: e.target.value });
 		}
 	};
-    
-    const registerSubmit = (e) => {
+
+	const registerSubmit = (e) => {
 		e.preventDefault();
 
 		const formData = new FormData(e.target);
-        formData.delete("name");
-        formData.delete("email");formData.delete("password");
+		formData.delete("name");
+		formData.delete("email");
+		formData.delete("password");
 		formData.append("name", name);
 		formData.append("email", email);
 		formData.append("password", password);
 		formData.append("avatar", avatar);
-        const registerActionParams = {formData};
-        
+		const registerActionParams = { formData };
+
 		dispatch(register(registerActionParams));
 	};
 
