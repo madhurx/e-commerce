@@ -66,9 +66,9 @@ export const updateProfile = createAsyncThunk(
 	async (updateProfileActionParams) => {
 		try {
 			let { formData } = updateProfileActionParams;
-            for (const entry of formData.entries()) {
-                    console.log(entry);
-                  }
+            // for (const entry of formData.entries()) {
+            //         console.log(entry);
+            //       }
 			const response = await axios.put("/api/v1/me/update", formData, {
 				headers: {
 					"Content-Type": "multipart/form-data",
@@ -79,6 +79,32 @@ export const updateProfile = createAsyncThunk(
 			// const data = await fetch(`/api/v1/me/update`);
 			// const result = await data.json();
 			// return result;
+		} catch (error) {
+			throw error;
+		}
+	},
+);
+
+export const updatePassword = createAsyncThunk(
+	"updatePasswordSlice",
+	async (updatePasswordActionParams) => {
+		try {
+			let { email, password  } = updatePasswordActionParams;
+            // for (const entry of formData.entries()) {
+            //         console.log(entry);
+            //       }
+			const data = await fetch(`/api/v1/password/update`, {
+                method: "PUT",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({ email, password }),
+            });
+            const result = await data.json();
+
+			// const data = await fetch(`/api/v1/me/update`);
+			// const result = await data.json();
+			return result;
 		} catch (error) {
 			throw error;
 		}
