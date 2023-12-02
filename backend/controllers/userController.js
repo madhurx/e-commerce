@@ -169,10 +169,9 @@ const getUserDetails = catchAsyncError(async (req, res, next) => {
 
 //update pass
 const updatePassword = catchAsyncError(async (req, res, next) => {
-    console.log(req.user.id)
+    
 	const user = await User.findById(req.user.id).select("+password");
 	const isPasswordMatched = await user.comparePasswords(req.body.oldPassword);
-    console.log(isPasswordMatched)
 
 	if (!isPasswordMatched) {
 		return next(new ErrorHandler("Old password is incorrect", 400));

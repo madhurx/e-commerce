@@ -42,11 +42,12 @@ const UpdatePassword = () => {
 			dispatch(clearErrors);
 		}
 		if (isUpdated) {
-			alert.success("Profile Updated Successfully");
+			alert.success("Password Updated Successfully");
 			dispatch(loadUser);
 			navigate("/account");
 			dispatch(resetUpdateUser());
 		}
+
 	}, [dispatch, error, alert, isUpdated, navigate]);
 
 	return (
