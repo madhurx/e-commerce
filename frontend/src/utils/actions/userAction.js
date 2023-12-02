@@ -1,5 +1,6 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
+import { useDispatch } from "react-redux";
 
 export const login = createAsyncThunk("userLoginSlice", async (loginActionParams) => {
 	try {
@@ -32,8 +33,6 @@ export const register = createAsyncThunk("userRegisterSlice", async (registerAct
 				"Content-Type": "multipart/form-data",
 			},
 		});
-
-		// console.log("Response:", response.data);
 		return response.data;
 	} catch (error) {
 		console.log(error.response.data);
@@ -66,19 +65,15 @@ export const updateProfile = createAsyncThunk(
 	async (updateProfileActionParams) => {
 		try {
 			let { formData } = updateProfileActionParams;
-            // for (const entry of formData.entries()) {
-            //         console.log(entry);
-            //       }
+			// for (const entry of formData.entries()) {
+			//         console.log(entry);
+			//       }
 			const response = await axios.put("/api/v1/me/update", formData, {
 				headers: {
 					"Content-Type": "multipart/form-data",
 				},
 			});
 			return response.data;
-
-			// const data = await fetch(`/api/v1/me/update`);
-			// const result = await data.json();
-			// return result;
 		} catch (error) {
 			throw error;
 		}
@@ -89,21 +84,71 @@ export const updatePassword = createAsyncThunk(
 	"updatePasswordSlice",
 	async (updatePasswordActionParams) => {
 		try {
-			let { email, password  } = updatePasswordActionParams;
-            // for (const entry of formData.entries()) {
-            //         console.log(entry);
-            //       }
-			const data = await fetch(`/api/v1/password/update`, {
-                method: "PUT",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify({ email, password }),
-            });
-            const result = await data.json();
+            let { formData }   = updatePasswordActionParams;
+			// for (const entry of formData.entries()) {
+			//         console.log(entry);
+			//       }
 
-			// const data = await fetch(`/api/v1/me/update`);
-			// const result = await data.json();
+			const data = await axios.put(
+				`/api/v1/password/update`,
+				formData,
+				{
+					headers: { "Content-Type": "application/json" }
+				},
+				// body: JSON.stringify({oldPassword, newPassword, confirmPassword}),
+			);
+			const result = await data.json();
+			return result;
+		} catch (error) {
+			throw error;
+		}
+	},
+);
+
+export const forgotPassword = createAsyncThunk(
+	"forgotPasswordSlice",
+	async (forgotPasswordActionParams) => {
+		try {
+            let { formData }   = forgotPasswordActionParams;
+			// for (const entry of formData.entries()) {
+			//         console.log(entry);
+			//       }
+
+			const data = await axios.post(
+				`/api/v1/password/forgot`,
+				formData,
+				{
+					headers: { "Content-Type": "application/json" }
+				},
+				// body: JSON.stringify({oldPassword, newPassword, confirmPassword}),
+			);
+			const result = await data.json();
+			return result;
+		} catch (error) {
+			throw error;
+		}
+	},
+);
+
+
+export const resetPassword = createAsyncThunk(
+	"resetPasswordSlice",
+	async (resetPasswordActionParams) => {
+		try {
+            let { token, passwords }   = resetPasswordActionParams;
+			// for (const entry of formData.entries()) {
+			//         console.log(entry);
+			//       }
+
+			const data = await axios.post(
+				`/api/v1/password/reset/${token}`,
+				passwords,
+				{
+					headers: { "Content-Type": "application/json" }
+				},
+				// body: JSON.stringify({oldPassword, newPassword, confirmPassword}),
+			);
+			const result = await data.json();
 			return result;
 		} catch (error) {
 			throw error;
