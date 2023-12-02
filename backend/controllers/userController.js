@@ -113,7 +113,8 @@ const forgetPassword = catchAsyncError(async (req, res, next) => {
 	const resetToken = await user.getResetPasswordToken();
 	await user.save({ validateBeforeSave: false });
 
-	const resetPassURL = `${req.protocol}://${req.get("host")}/api/v1/password/reset/${resetToken}`;
+	// const resetPassURL = `${process.env.FRONTEND_URL}://${req.get("host")}/api/v1/password/reset/${resetToken}`;
+    const resetPassURL = `${process.env.FRONTEND_URL}/password/reset/${resetToken}`;
 
 	const message = `Reset your password : ${resetPassURL} \n\n If you not requested this email, then ignore it.`;
 	try {

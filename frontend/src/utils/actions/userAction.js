@@ -98,9 +98,57 @@ export const updatePassword = createAsyncThunk(
 				// body: JSON.stringify({oldPassword, newPassword, confirmPassword}),
 			);
 			const result = await data.json();
+			return result;
+		} catch (error) {
+			throw error;
+		}
+	},
+);
 
-			// const data = await fetch(`/api/v1/me/update`);
-			// const result = await data.json();
+export const forgotPassword = createAsyncThunk(
+	"forgotPasswordSlice",
+	async (forgotPasswordActionParams) => {
+		try {
+            let { formData }   = forgotPasswordActionParams;
+			// for (const entry of formData.entries()) {
+			//         console.log(entry);
+			//       }
+
+			const data = await axios.post(
+				`/api/v1/password/forgot`,
+				formData,
+				{
+					headers: { "Content-Type": "application/json" }
+				},
+				// body: JSON.stringify({oldPassword, newPassword, confirmPassword}),
+			);
+			const result = await data.json();
+			return result;
+		} catch (error) {
+			throw error;
+		}
+	},
+);
+
+
+export const resetPassword = createAsyncThunk(
+	"resetPasswordSlice",
+	async (resetPasswordActionParams) => {
+		try {
+            let { token, passwords }   = resetPasswordActionParams;
+			// for (const entry of formData.entries()) {
+			//         console.log(entry);
+			//       }
+
+			const data = await axios.post(
+				`/api/v1/password/reset/${token}`,
+				passwords,
+				{
+					headers: { "Content-Type": "application/json" }
+				},
+				// body: JSON.stringify({oldPassword, newPassword, confirmPassword}),
+			);
+			const result = await data.json();
 			return result;
 		} catch (error) {
 			throw error;
