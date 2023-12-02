@@ -16,7 +16,7 @@ const ProductCard = ({ product }) => {
 	return (
 		<Link
 			className="productCard  w-[14vmax] flex flex-col no-underline text-gray-600 m-[2vmax] transition-all duration-500 pb-[0.5vmax] hover:shadow-[5px 5px 3px rgba(175, 175, 180, 0.76)] hover:shadow hover:translate-y-[-1vmax] "
-			to={`product/${product._id}`}
+			to={`/product/${product._id}`}
 			key={product.index}>
 			<img    
 				src={product.images[0].url}
