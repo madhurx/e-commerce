@@ -10,20 +10,13 @@ import Loader from "../layout/Loader/Loader";
 import { useAlert } from "react-alert";
 import { clearErrors } from "../../utils/slices/productDetailSlice";
 import MetaData from "../layout/MetaData";
+import { addItemsToCart } from "../../utils/actions/cartAction";
 
 const ProductDetails = () => {
 	const dispatch = useDispatch();
 	const alert = useAlert();
 	const params = useParams();
 	const { product, loading, error } = useSelector((state) => state.productDetail);
-
-	useEffect(() => {
-		if (error) {
-			alert.error(error);
-			dispatch(clearErrors);
-		}
-		dispatch(getProductDetail(params.id));
-	}, [dispatch, params.id, alert, error]);
 
 	const options = {
 		edit: false,
@@ -36,22 +29,34 @@ const ProductDetails = () => {
 
 	const [quantity, setQuantity] = useState(1);
 	const increaseQuantity = () => {
-        if (product.stock <= quantity) {
-            return;
-        }
+		if (product.stock <= quantity) {
+			return;
+		}
 		const qty = quantity + 1;
 		setQuantity(qty);
 	};
 
 	const decreaseQuantity = () => {
-        if (1 >= quantity) {
-            return;
-        }
+		if (1 >= quantity) {
+			return;
+		}
 		const qty = quantity - 1;
 		setQuantity(qty);
 	};
 
-	
+	const addToCartHandler = () => {
+        const idAndQuantity = {id : params.id, quantity}
+		dispatch(addItemsToCart(idAndQuantity));
+		alert.success("Item added to cart");
+	};
+
+	useEffect(() => {
+		if (error) {
+			alert.error(error);
+			dispatch(clearErrors);
+		}
+		dispatch(getProductDetail(params.id));
+	}, [dispatch, params.id, alert, error]);
 
 	return (
 		<div>
@@ -98,7 +103,7 @@ const ProductDetails = () => {
 										/>
 										<button onClick={increaseQuantity}>+</button>
 									</div>
-									<button>Add to Cart</button>
+									<button onClick={addToCartHandler}>Add to Cart</button>
 								</div>
 								<p>
 									Status:
