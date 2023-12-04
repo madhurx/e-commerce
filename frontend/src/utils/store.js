@@ -5,6 +5,7 @@ import userSlice from "./slices/userSlice";
 import thunk from "redux-thunk";
 import profileSlice from "./slices/profileSlice";
 import cartSlice from "./slices/cartSlice";
+import orderSlice from "./slices/orderSlice";
 
 const storedCartItems = localStorage.getItem("cartItems");
 let parsedCartItems;
@@ -26,6 +27,7 @@ const store = configureStore({
 		user: userSlice,
 		profile: profileSlice,
 		cart: cartSlice,
+		order: orderSlice,
 	},
 	middleware: [thunk],
 	initialState: {

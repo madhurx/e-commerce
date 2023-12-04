@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import "./App.css";
 import Header from "./component/layout/Header/Header";
 import webFont from "webfontloader";
@@ -21,9 +21,21 @@ import ForgotPassword from "./component/User/ForgotPassword";
 import ResetPassword from "./component/User/ResetPassword";
 import Cart from "./component/Cart/Cart";
 import Shipping from "./component/Cart/Shipping";
+import Payment from "./component/Cart/Payment";
+import axios from "axios";
+import { Elements } from "@stripe/react-stripe-js";
+import { loadStripe } from "@stripe/stripe-js";
 
 function App() {
 	const { userDetail, isAuthenticated } = useSelector((state) => state.user);
+	const [stripeApiKey, setStripeApiKey] = useState("");
+	const [isStripeApiKeyLoaded, setIsStripeApiKeyLoaded] = useState(false);
+
+	async function getStripeApiKey() {
+		const { data } = await axios.get("/api/v1/stripeapikey");
+		setStripeApiKey(data.stripeApiKey);
+		setIsStripeApiKeyLoaded(true);
+	}
 
 	useEffect(() => {
 		webFont.load({
@@ -36,16 +48,19 @@ function App() {
 			},
 		});
 		store.dispatch(loadUser());
+        getStripeApiKey();
 	}, []);
 
 	const AppLayout = () => {
 		return (
-			<div className="flex flex-col">
-				{isAuthenticated && <UserOptions user={userDetail} />}
-				<Header />
-				<Outlet />
-				<Footer />
-			</div>
+			<Elements stripe={loadStripe(stripeApiKey)}>
+				<div className="flex flex-col">
+					{isAuthenticated && <UserOptions user={userDetail} />}
+					<Header />
+					<Outlet />
+					<Footer />
+				</div>
+			</Elements>
 		);
 	};
 	const router = createBrowserRouter([
@@ -104,6 +119,12 @@ function App() {
 				{
 					path: "/shipping",
 					element: <ProtectedRoute path="/shipping" component={Shipping} />,
+				},
+				{
+					path: "/process/payment",
+					element: isStripeApiKeyLoaded ? (
+						<ProtectedRoute path="/process/payment" component={Payment} />
+					) : null,
 				},
 			],
 		},
