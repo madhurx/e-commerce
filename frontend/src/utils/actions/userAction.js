@@ -1,6 +1,5 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
-import { useDispatch } from "react-redux";
 
 export const login = createAsyncThunk("userLoginSlice", async (loginActionParams) => {
 	try {
