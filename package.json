@@ -29,6 +29,7 @@
 		"nodemailer": "^6.9.7",
 		"nodemon": "^3.0.1",
 		"react-router-dom": "^6.20.0",
+		"stripe": "^14.7.0",
 		"validator": "^13.11.0"
 	}
 }
