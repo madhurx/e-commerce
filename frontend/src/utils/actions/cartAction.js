@@ -1,7 +1,7 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 import store from "../store";
-import { addToCart } from "../slices/cartSlice";
+import { addToCart, removeFromCart } from "../slices/cartSlice";
 
 export const addItemsToCart = createAsyncThunk(
 	"addItemsToCartSlice",
@@ -20,6 +20,22 @@ export const addItemsToCart = createAsyncThunk(
 						stock: data.product.Stock,
 						quantity,
 					},
+				}),
+			);
+			localStorage.setItem("cartItems", JSON.stringify(store.getState().cart.cartItems));
+		} catch (error) {
+			console.log(error);
+		}
+	},
+);
+
+export const removeItemsFromCart = createAsyncThunk(
+	"removeItemsFromCartSlice",
+	async (id, { dispatch }) => {
+		try {
+			dispatch(
+				removeFromCart({
+					payload: id,
 				}),
 			);
 			localStorage.setItem("cartItems", JSON.stringify(store.getState().cart.cartItems));

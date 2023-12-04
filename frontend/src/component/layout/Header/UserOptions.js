@@ -19,10 +19,16 @@ const UserOptions = ({ user }) => {
 	const alert = useAlert();
 	const dispatch = useDispatch();
 
+	const { cartItems } = useSelector((state) => state.cart);
+
 	const options = [
 		{ icon: <ListAltIcon />, name: "Orders", func: orders },
 		{ icon: <PersonIcon />, name: "Profile", func: account },
-
+		{
+			icon: <ShoppingCartIcon style={{ color: cartItems.length > 0 ? "tomato" : "unset" }} />,
+			name: `Cart(${cartItems.length})`,
+			func: cart,
+		},
 		{ icon: <ExitToAppIcon />, name: "Logout", func: logoutUser },
 	];
 
