@@ -44,3 +44,19 @@ export const removeItemsFromCart = createAsyncThunk(
 		}
 	},
 );
+
+export const saveShippingInfo = createAsyncThunk(
+	"saveShippingInfoSlice",
+	async (data, { dispatch }) => {
+		try {
+			dispatch(
+				saveShippingInfo({
+					payload: data,
+				}),
+			);
+			localStorage.setItem("shippingInfo", JSON.stringify(data));
+		} catch (error) {
+			console.log(error);
+		}
+	},
+);

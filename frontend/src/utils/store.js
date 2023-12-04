@@ -32,6 +32,9 @@ const store = configureStore({
 		cart: {
 			cartItems: parsedCartItems,
 		},
+		shippingInfo: localStorage.getItem("shippingInfo")
+			? JSON.parse(localStorage.getItem("shippingInfo"))
+			: {},
 	},
 });
 
