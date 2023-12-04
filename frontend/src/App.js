@@ -92,10 +92,11 @@ function App() {
 					path: "/password/forgot",
 					element: <ForgotPassword />,
 				},
-                {
+				{
 					path: "/password/reset/:token",
 					element: <ResetPassword />,
-				},{
+				},
+				{
 					path: "/cart",
 					element: <Cart />,
 				},
