@@ -25,6 +25,7 @@ import Payment from "./component/Cart/Payment";
 import axios from "axios";
 import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
+import OrderSuccess from "./component/Cart/OrderSuccess";
 
 function App() {
 	const { userDetail, isAuthenticated } = useSelector((state) => state.user);
@@ -125,6 +126,10 @@ function App() {
 					element: isStripeApiKeyLoaded ? (
 						<ProtectedRoute path="/process/payment" component={Payment} />
 					) : null,
+				},
+                {
+					path: "/success",
+					element: <ProtectedRoute path="/success" component={OrderSuccess} />,
 				},
 			],
 		},
