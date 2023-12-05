@@ -26,6 +26,9 @@ import axios from "axios";
 import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
 import OrderSuccess from "./component/Cart/OrderSuccess";
+import MyOrders from "./component/Order/MyOrders";
+import OrderDetails from "./component/Order/OrderDetails";
+import ConfirmOrder from "./component/Cart/ConfirmOrder";
 
 function App() {
 	const { userDetail, isAuthenticated } = useSelector((state) => state.user);
@@ -49,7 +52,7 @@ function App() {
 			},
 		});
 		store.dispatch(loadUser());
-        getStripeApiKey();
+		getStripeApiKey();
 	}, []);
 
 	const AppLayout = () => {
@@ -127,9 +130,21 @@ function App() {
 						<ProtectedRoute path="/process/payment" component={Payment} />
 					) : null,
 				},
-                {
+				{
 					path: "/success",
 					element: <ProtectedRoute path="/success" component={OrderSuccess} />,
+				},
+				{
+					path: "/orders",
+					element: <ProtectedRoute path="/success" component={MyOrders} />,
+				},
+				{
+					path: "/order/:id",
+					element: <ProtectedRoute path="/order/:id" component={OrderDetails} />,
+				},
+				{
+					path: "/order/confirm",
+					element: <ProtectedRoute path="/order/confirm" component={ConfirmOrder} />,
 				},
 			],
 		},
