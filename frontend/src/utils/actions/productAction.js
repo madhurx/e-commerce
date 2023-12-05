@@ -32,3 +32,13 @@ export const getProductDetail = createAsyncThunk("productDetailSlice", async (id
 		throw error;
 	}
 });
+
+export const getAdminProduct = createAsyncThunk("productDetailSlice", async (id) => {
+	try {
+		const data = await fetch(`/api/v1/product/${id}`);
+		const result = await data.json();
+		return result;
+	} catch (error) {
+		throw error;
+	}
+});
